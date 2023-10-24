@@ -37,7 +37,7 @@
 				<tr>
 					<th>Phone Number: </th>
 					<td align="center" colspan="3">
-						<input type="text" name="phoneNumber" size="45" value="+x-xxx-xxx-xxxx" onfocus="this.value=''">
+						<input type="text" name="phoneNum" size="45" value="xxxxxxxxxx" onfocus="this.value=''">
 					</td>
 	
 				</tr>

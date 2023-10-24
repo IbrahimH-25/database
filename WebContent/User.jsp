@@ -32,7 +32,7 @@
                 <td>"${users.lastName}" /></td>
                 <td>"${users.adress_street_num} ${users.adress_street} ${users.adress_city} ${users.adress_state} ${users.adress_zip_code}" /></td>
                 <td>"${users.password}" /></td>
-                <td>"${users.phoneNumber}" /></td>
+                <td>"${users.phoneNum}" /></td>
                 <td>"${users.clientID}"/></td>
                 <td>"${users.creditCard}" /></td>
              </tr>

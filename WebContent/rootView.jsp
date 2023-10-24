@@ -38,7 +38,7 @@
                     <td><c:out value="${users.lastName}" /></td>
                     <td><c:out value="${users.adress_street_num} ${users.adress_street} ${users.adress_city} ${users.adress_state} ${users.adress_zip_code}" /></td>
                     <td><c:out value="${users.password}" /></td>
-                    <td><c:out value="${users.phoneNumber}" /></td>
+                    <td><c:out value="${users.phoneNum}" /></td>
                     <td><c:out value="${users.clientID}"/></td>
                     <td><c:out value="${users.creditCard}" /></td>
             </c:forEach>
