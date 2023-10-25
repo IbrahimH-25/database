@@ -61,7 +61,8 @@ public class ControlServlet extends HttpServlet {
         	case "/deleteAllUsers":
         		userDAO.deleteAllUsers();
         		System.out.println("Database entries deleted!");
-        		rootPage(request,response,"");
+        		//rootPage(request,response,"");
+        		rootPage(request,response,"");      
         		break;
         	case "/root":
         		rootPage(request,response, "");

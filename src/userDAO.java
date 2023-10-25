@@ -80,10 +80,10 @@ public class userDAO
     }
     
     public void deleteAllUsers() throws SQLException {
-    	String sql = "DELETE FROM DavesTimber WHERE email <> root";
+    	String sql = "DELETE FROM user WHERE email <> 'root'";
         connect_func();      
         statement = (Statement) connect.createStatement();
-        statement.executeQuery(sql);
+        statement.execute(sql);
 
         disconnect();    
     }
