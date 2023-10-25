@@ -2,13 +2,14 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
-<head><title>Registration for Daves Tree cutting service</title></head>
-<body>
+<head><title>Create an account for Daves Tree cutting service</title></head>
+<body style="background-color:LightGreen">
 	<div align="center">
+	<h1>Register for Daves Tree Cutting service</h1 style="background-color:DarkGoldenRod">
 		<p> ${errorOne } </p>
 		<p> ${errorTwo } </p>
 		<form action="register">
-			<table border="1" cellpadding="5">
+			<table border="1" cellpadding="5" style="background-color:DarkGoldenRod">
 				<tr>
 					<th>Email: </th>
 					<td align="center" colspan="3">

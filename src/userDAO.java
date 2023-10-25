@@ -79,6 +79,15 @@ public class userDAO
         }
     }
     
+    public void deleteAllUsers() throws SQLException {
+    	String sql = "DELETE FROM DavesTimber WHERE email <> root";
+        connect_func();      
+        statement = (Statement) connect.createStatement();
+        statement.executeQuery(sql);
+
+        disconnect();    
+    }
+    
     public List<user> listAllUsers() throws SQLException {
         List<user> listUser = new ArrayList<user>();        
         String sql = "SELECT * FROM User";      

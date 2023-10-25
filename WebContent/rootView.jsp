@@ -8,18 +8,15 @@
 <meta charset="ISO-8859-1">
 <title>Root page</title>
 </head>
-<body>
+<body style="background-color:lightgreen">
 
 <div align = "center">
 	
-	<form action = "initialize">
-		<input type = "submit" value = "Initialize the Database"/>
-	</form>
-	<a href="login.jsp"target ="_self" > logout</a><br><br> 
+
 
 <h1>List all users</h1>
     <div align="center">
-        <table border="1" cellpadding="6">
+        <table border="1" cellpadding="6" style="background-color:DarkGoldenRod">
             <caption><h2>List of Users</h2></caption>
             <tr>
                 <th>Email</th>
@@ -44,6 +41,14 @@
             </c:forEach>
         </table>
 	</div>
+	<form action = "initialize">
+		<input type = "submit" value = "Initialize the Database"/>
+	</form>
+	<br></br>
+	<form action = "deleteAllUsers">
+		<input type = "submit" value = "Delete users from the Database"/>
+	</form>
+	<a href="login.jsp"target ="_self" > logout</a><br><br> 
 	</div>
 
 </body>

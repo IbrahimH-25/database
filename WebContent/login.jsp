@@ -6,12 +6,12 @@
 <meta charset="ISO-8859-1">
 <title>Login to Database</title>
 </head>
-<body>
- <center>	<h1> Welcome to -project name here- website> </h1> </center>
+<body style="background-color:lightgreen">
+ <center>	<h1> Welcome to Daves Timber> </h1> </center>
 	<div align="center">
 		<p> ${loginFailedStr} </p>
 		<form action="login" method="post">
-			<table border="1" cellpadding="5">
+			<table border="1" cellpadding="5" style="background-color:DarkGoldenRod">
 				<tr>
 					<th>Email: </th>
 					<td>
