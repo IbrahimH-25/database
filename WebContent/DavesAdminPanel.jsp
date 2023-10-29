@@ -19,27 +19,31 @@
         <table border="1" cellpadding="6" style="background-color:DarkGoldenRod">
             <caption><h2>List of Users</h2></caption>
             <tr>
-                <th>Email</th>
-                <th>First name</th>
-                <th>Last name</th>
-                <th>Address</th>
-                <th>Password</th>
-                <th>Phone Number</th>
                 <th>Client ID</th>
-                <th>Credit Card</th>
+                <th>Quote Status</th>
+                <th>Bill ID</th>
             </tr>
             <c:forEach var="users" items="${listUser}">
                 <tr style="text-align:center">
-                    <td><c:out value="${users.email}" /></td>
-                    <td><c:out value="${users.firstName}" /></td>
-                    <td><c:out value="${users.lastName}" /></td>
-                    <td><c:out value="${users.adress_street_num} ${users.adress_street} ${users.adress_city} ${users.adress_state} ${users.adress_zip_code}" /></td>
-                    <td><c:out value="${users.password}" /></td>
-                    <td><c:out value="${users.phoneNum}" /></td>
-                    <td><c:out value="${users.clientID}"/></td>
-                    <td><c:out value="${users.creditCard}" /></td>
+                    <td><c:out value="${users.clientID}" /></td>
+                    <td><c:out value="${users.quoteStatus}" /></td>
+                    <td><c:out value="${users.billID}" /></td>
+
             </c:forEach>
         </table>
+        
+        
+        <form action="register">
+			<table border="1" cellpadding="5" style="background-color:DarkGoldenRod">
+				<tr>
+					<th>Email: </th>
+					<td align="center" colspan="3">
+						<input type="text" name="email" size="45"  value="example@gmail.com" onfocus="this.value=''">
+					</td>
+				</tr>
+			</table>
+		<a href="login.jsp" target="_self">Return to Login Page</a>
+	</form>
 	</div>
 	<form action = "initialize">
 		<input type = "submit" value = "Initialize the Database"/>

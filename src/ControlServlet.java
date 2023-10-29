@@ -67,6 +67,9 @@ public class ControlServlet extends HttpServlet {
         	case "/root":
         		rootPage(request,response, "");
         		break;
+        	case "/DavesView":
+        		AdminPanel(request,response);
+        		break;
         	case "/logout":
         		logout(request,response);
         		break;
@@ -100,6 +103,11 @@ public class ControlServlet extends HttpServlet {
 	    	request.getRequestDispatcher("rootView.jsp").forward(request, response);
 	    }
 	    
+	    private void AdminPanel(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException{
+	    	System.out.println("Daves Admin Panel");
+			//request.setAttribute("listUser", userDAO.listAllUsers());
+	    	request.getRequestDispatcher("DavesAdminPanel.jsp").forward(request, response);
+	    }
 	    
 	    protected void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
 	    	 String email = request.getParameter("email");
