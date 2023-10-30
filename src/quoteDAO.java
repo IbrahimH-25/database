@@ -52,20 +52,6 @@ public class quoteDAO{
         }
     }
     
-    public boolean database_login(String email, String password) throws SQLException{
-    	try {
-    		connect_func("root","pass1234");
-    		String sql = "select * from user where email = ?";
-    		preparedStatement = connect.prepareStatement(sql);
-    		preparedStatement.setString(1, email);
-    		ResultSet rs = preparedStatement.executeQuery();
-    		return rs.next();
-    	}
-    	catch(SQLException e) {
-    		System.out.println("failed login");
-    		return false;
-    	}
-    }
 	//connect to the database 
     public void connect_func(String username, String password) throws SQLException {
         if (connect == null || connect.isClosed()) {
@@ -82,7 +68,7 @@ public class quoteDAO{
     }
     
     public void deleteAllUsers() throws SQLException {
-    	String sql = "DELETE FROM user WHERE email <> 'root'";
+    	String sql = "DELETE FROM quote";
         connect_func();      
         statement = (Statement) connect.createStatement();
         statement.execute(sql);
@@ -126,22 +112,14 @@ public class quoteDAO{
         }
     }
     
-    public void insert(user users) throws SQLException {
+    public void insert(quote quotes) throws SQLException {
     	connect_func("root","pass1234");         
-		String sql = "insert into User(email, firstName, lastName, password, clientID,adress_street_num, adress_street,adress_city,adress_state,adress_zip_code,creditCard,phoneNum) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,? ,?)";
+		String sql = "insert into Quotes(orderID, quoteStatus, initialPrice, note) values (?, ?, ?, ?)";
 		preparedStatement = (PreparedStatement) connect.prepareStatement(sql);
-			preparedStatement.setString(1, users.getEmail());
-			preparedStatement.setString(2, users.getFirstName());
-			preparedStatement.setString(3, users.getLastName());
-			preparedStatement.setString(4, users.getPassword());
-			preparedStatement.setString(5, users.getClientID());
-			preparedStatement.setString(6, users.getAdress_street_num());		
-			preparedStatement.setString(7, users.getAdress_street());		
-			preparedStatement.setString(8, users.getAdress_city());		
-			preparedStatement.setString(9, users.getAdress_state());		
-			preparedStatement.setString(10, users.getAdress_zip_code());		
-			preparedStatement.setString(11, users.getCreditCard());		
-			preparedStatement.setString(12, users.getPhoneNum());		
+			preparedStatement.setString(1, quotes.orderID());
+			preparedStatement.setString(2, quotes.quoteStatus());
+			preparedStatement.setString(3, quotes.initialPrice());	
+			preparedStatement.setString(4, quotes.note());
 
 		preparedStatement.executeUpdate();
         preparedStatement.close();

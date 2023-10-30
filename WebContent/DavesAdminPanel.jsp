@@ -38,7 +38,10 @@
 				<tr>
 					<th>Email: </th>
 					<td align="center" colspan="3">
-						<input type="text" name="email" size="45"  value="example@gmail.com" onfocus="this.value=''">
+						<input type="text" name="OrderID" size="45"  value="000000" onfocus="this.value=''">
+						<input type="text" name="Status" size="45"  value="'Sent','Recieved','Pending'" onfocus="this.value=''">
+						<input type="text" name="InitialPrice" size="45"  value="$" onfocus="this.value=''">
+						<input type="text" name="Note" size="45"  value="Lipsum" onfocus="this.value=''">
 					</td>
 				</tr>
 			</table>
