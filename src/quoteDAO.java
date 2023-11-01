@@ -78,7 +78,7 @@ public class quoteDAO{
     
     public List<user> listAllUsers() throws SQLException {
         List<user> listUser = new ArrayList<user>();        
-        String sql = "SELECT * FROM User";      
+        String sql = "SELECT * FROM quotes";      
         connect_func();      
         statement = (Statement) connect.createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
@@ -88,17 +88,9 @@ public class quoteDAO{
             String firstName = resultSet.getString("firstName");
             String lastName = resultSet.getString("lastName");
             String password = resultSet.getString("password");
-            String clientID = resultSet.getString("clientID");
-            String adress_street_num = resultSet.getString("adress_street_num"); 
-            String adress_street = resultSet.getString("adress_street"); 
-            String adress_city = resultSet.getString("adress_city"); 
-            String adress_state = resultSet.getString("adress_state"); 
-            String adress_zip_code = resultSet.getString("adress_zip_code"); 
-            String creditCard = resultSet.getString("creditCard");
-            String phoneNum = resultSet.getString("phoneNum");
 
              
-            user users = new user(email,firstName, lastName, password, clientID, adress_street_num,  adress_street,  adress_city,  adress_state,  adress_zip_code, creditCard,phoneNum);
+            user users = new user(email,firstName, lastName, password);
             listUser.add(users);
         }        
         resultSet.close();
