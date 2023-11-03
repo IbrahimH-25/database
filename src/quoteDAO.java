@@ -76,26 +76,26 @@ public class quoteDAO{
         disconnect();    
     }
     
-    public List<user> listAllUsers() throws SQLException {
-        List<user> listUser = new ArrayList<user>();        
+    public List<quote> listAllUsers() throws SQLException {
+        List<quote> listQuote = new ArrayList<quote>();        
         String sql = "SELECT * FROM quotes";      
         connect_func();      
         statement = (Statement) connect.createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
          
         while (resultSet.next()) {
-            String email = resultSet.getString("email");
-            String firstName = resultSet.getString("firstName");
-            String lastName = resultSet.getString("lastName");
-            String password = resultSet.getString("password");
+            String orderID = resultSet.getString("orderID");
+            String quoteStatus = resultSet.getString("quoteStatus");
+            String initialPrice = resultSet.getString("initialPrice");
+            String note = resultSet.getString("note");
 
              
-            user users = new user(email,firstName, lastName, password);
-            listUser.add(users);
+            quote quotes = new quote(orderID, quoteStatus, initialPrice, note);
+            listQuote.add(quotes);
         }        
         resultSet.close();
         disconnect();        
-        return listUser;
+        return listQuote;
     }
     
     protected void disconnect() throws SQLException {
@@ -105,13 +105,13 @@ public class quoteDAO{
     }
     
     public void insert(quote quotes) throws SQLException {
-    	connect_func("root","pass1234");         
+    	//connect_func("root","pass1234");         
 		String sql = "insert into Quotes(orderID, quoteStatus, initialPrice, note) values (?, ?, ?, ?)";
 		preparedStatement = (PreparedStatement) connect.prepareStatement(sql);
-			preparedStatement.setString(1, quotes.orderID());
-			preparedStatement.setString(2, quotes.quoteStatus());
-			preparedStatement.setString(3, quotes.initialPrice());	
-			preparedStatement.setString(4, quotes.note());
+			preparedStatement.setString(1, quotes.getQuoteID());
+			preparedStatement.setString(2, quotes.getQuoteStatus());
+			preparedStatement.setString(3, quotes.getInitialPrice());	
+			preparedStatement.setString(4, quotes.getNote());
 
 		preparedStatement.executeUpdate();
         preparedStatement.close();
@@ -129,59 +129,44 @@ public class quoteDAO{
         return rowDeleted;     
     }
      
-    public boolean update(user users) throws SQLException {
-        String sql = "update User set firstName=?, lastName =?,password = ?,clientID=?,adress_street_num =?, adress_street=?,adress_city=?,adress_state=?,adress_zip_code=?, creditCard=?, phoneNum =? where email = ?";
+    public boolean update(quote quotes) throws SQLException {
+        String sql = "update quote set quoteStatus =?,intitialPrice = ? , note=?, where orderID = ?";
         connect_func();
         
         preparedStatement = (PreparedStatement) connect.prepareStatement(sql);
-        preparedStatement.setString(1, users.getEmail());
-        preparedStatement.setString(2, users.getFirstName());
-        preparedStatement.setString(3, users.getLastName());
-        preparedStatement.setString(4, users.getPassword());
-        preparedStatement.setString(5, users.getClientID());
-        preparedStatement.setString(6, users.getAdress_street_num());		
-        preparedStatement.setString(7, users.getAdress_street());		
-        preparedStatement.setString(8, users.getAdress_city());		
-        preparedStatement.setString(9, users.getAdress_state());		
-        preparedStatement.setString(10, users.getAdress_zip_code());		
-        preparedStatement.setString(11, users.getCreditCard());		
-        preparedStatement.setString(12, users.getPhoneNum());		
-         
+        preparedStatement.setString(1, quotes.getQuoteID());
+        preparedStatement.setString(2, quotes.getQuoteStatus());
+        preparedStatement.setString(3, quotes.getInitialPrice());
+        preparedStatement.setString(4, quotes.getNote());
+      
         boolean rowUpdated = preparedStatement.executeUpdate() > 0;
         preparedStatement.close();
         return rowUpdated;     
     }
     
-    public user getUser(String email) throws SQLException {
-    	user user = null;
-        String sql = "SELECT * FROM User WHERE email = ?";
+    public quote getQuote(String orderID) throws SQLException {
+    	quote quote = null;
+        String sql = "SELECT * FROM quote WHERE orderID = ?";
          
         connect_func();
          
         preparedStatement = (PreparedStatement) connect.prepareStatement(sql);
-        preparedStatement.setString(1, email);
+        preparedStatement.setString(1, orderID);
          
         ResultSet resultSet = preparedStatement.executeQuery();
          
         if (resultSet.next()) {
-            String firstName = resultSet.getString("firstName");
-            String lastName = resultSet.getString("lastName");
-            String password = resultSet.getString("password");
-            String clientID = resultSet.getString("clientID");
-            String adress_street_num = resultSet.getString("adress_street_num"); 
-            String adress_street = resultSet.getString("adress_street"); 
-            String adress_city = resultSet.getString("adress_city"); 
-            String adress_state = resultSet.getString("adress_state"); 
-            String adress_zip_code = resultSet.getString("adress_zip_code"); 
-            String creditCard = resultSet.getString("creditCard");
-            String phoneNum = resultSet.getString("phoneNum");
-            user = new user(email, firstName, lastName, password, clientID, adress_street_num,  adress_street,  adress_city,  adress_state,  adress_zip_code,creditCard,phoneNum);
+            String quoteStatus = resultSet.getString("quoteStatus");
+            String initialPrice = resultSet.getString("initialPrice");
+            String note = resultSet.getString("note");
+
+            quote = new quote(orderID, quoteStatus, initialPrice, note);
         }
          
         resultSet.close();
         statement.close();
          
-        return user;
+        return quote;
     }
     
     public boolean checkEmail(String email) throws SQLException {

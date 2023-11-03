@@ -48,8 +48,8 @@
 		<a href="login.jsp" target="_self">Return to Login Page</a>
 	</form>
 	</div>
-	<form action = "initialize">
-		<input type = "submit" value = "Initialize the Database"/>
+	<form action = "quoteInsertFromDave">
+		<input type = "submit" value = "insert/send quote request"/>
 	</form>
 	<br></br>
 	<form action = "deleteAllUsers">

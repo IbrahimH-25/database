@@ -23,6 +23,7 @@ import java.sql.PreparedStatement;
 public class ControlServlet extends HttpServlet {
 	    private static final long serialVersionUID = 1L;
 	    private userDAO userDAO = new userDAO();
+	    private quoteDAO quoteDAO = new quoteDAO();
 	    private String currentUser;
 	    private HttpSession session=null;
 	    
@@ -70,6 +71,12 @@ public class ControlServlet extends HttpServlet {
         	case "/DavesView":
         		AdminPanel(request,response);
         		break;
+        	case "/quoteInsertFromDave":
+        		System.out.println("Quote from dave sent!");
+        		quoteInsertFromDave(request,response);
+
+        		AdminPanel(request,response);
+        		break;        		
         	case "/logout":
         		logout(request,response);
         		break;
@@ -109,6 +116,20 @@ public class ControlServlet extends HttpServlet {
 	    	request.getRequestDispatcher("DavesAdminPanel.jsp").forward(request, response);
 	    }
 	    
+	    private void quoteInsertFromDave(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException
+    	{
+	    	System.out.println("Dave Sent Quote?");
+	    	String orderID = request.getParameter("orderID");
+	   	 	String quoteStatus = request.getParameter("quoteStatus");
+	   	 	String initialPrice = request.getParameter("initialPrice");
+	   	 	String note = request.getParameter("note");
+            quote quotes = new quote(orderID,quoteStatus, initialPrice, note);
+   	 		quoteDAO.insert(quotes);
+   	 		//response.sendRedirect("login.jsp");
+	    	request.getRequestDispatcher("DavesAdminPanel.jsp").forward(request, response);
+
+    	}
+    	
 	    protected void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
 	    	 String email = request.getParameter("email");
 	    	 String password = request.getParameter("password");
@@ -166,7 +187,9 @@ public class ControlServlet extends HttpServlet {
 	   		 request.setAttribute("errorTwo","Registration failed: Password and Password Confirmation do not match.");
 	   		 request.getRequestDispatcher("register.jsp").forward(request, response);
 	   	 	}
-	    }    
+	    }   
+	    
+
 	    private void logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
 	    	currentUser = "";
         		response.sendRedirect("login.jsp");
