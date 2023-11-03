@@ -68,14 +68,15 @@ public class ControlServlet extends HttpServlet {
         	case "/root":
         		rootPage(request,response, "");
         		break;
-        	case "/DavesView":
+        	case "/DavesAdminPanel":
         		AdminPanel(request,response);
         		break;
         	case "/quoteInsertFromDave":
-        		System.out.println("Quote from dave sent!");
+        		System.out.println("Quote from dave being sent!");
         		quoteInsertFromDave(request,response);
-
+        		System.out.println("Quote from dave sent - redirecting");
         		AdminPanel(request,response);
+        		System.out.println("Quote from dave sent!");
         		break;        		
         	case "/logout":
         		logout(request,response);
@@ -120,13 +121,21 @@ public class ControlServlet extends HttpServlet {
     	{
 	    	System.out.println("Dave Sent Quote?");
 	    	String orderID = request.getParameter("orderID");
+	    	System.out.println("1");
 	   	 	String quoteStatus = request.getParameter("quoteStatus");
+	    	System.out.println("2");
 	   	 	String initialPrice = request.getParameter("initialPrice");
+	    	System.out.println("3");
 	   	 	String note = request.getParameter("note");
+	    	System.out.println("4");
             quote quotes = new quote(orderID,quoteStatus, initialPrice, note);
+	    	System.out.println("5");
    	 		quoteDAO.insert(quotes);
+	    	System.out.println("Quote done");
    	 		//response.sendRedirect("login.jsp");
-	    	request.getRequestDispatcher("DavesAdminPanel.jsp").forward(request, response);
+   	 		response.sendRedirect("DavesAdminPanel.jsp");
+	    	//request.getRequestDispatcher("DavesAdminPanel.jsp").forward(request, response);
+
 
     	}
     	

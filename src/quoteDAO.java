@@ -105,7 +105,7 @@ public class quoteDAO{
     }
     
     public void insert(quote quotes) throws SQLException {
-    	//connect_func("root","pass1234");         
+    	connect_func("root","pass1234");         
 		String sql = "insert into Quotes(orderID, quoteStatus, initialPrice, note) values (?, ?, ?, ?)";
 		preparedStatement = (PreparedStatement) connect.prepareStatement(sql);
 			preparedStatement.setString(1, quotes.getQuoteID());
