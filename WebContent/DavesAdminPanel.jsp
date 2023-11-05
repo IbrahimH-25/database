@@ -36,17 +36,32 @@
         <form action="quoteInsertFromDave">
 			<table border="1" cellpadding="5" style="background-color:DarkGoldenRod">
 				<tr>
-					<th>Email: </th>
+					<th>Quote ID: </th>
 					<td align="center" colspan="3">
-						<input type="text" name="OrderID" size="45"  value="000000" onfocus="this.value=''">
-						<input type="text" name="Status" size="45"  value="'Sent','Recieved','Pending'" onfocus="this.value=''">
-						<input type="text" name="InitialPrice" size="45"  value="$" onfocus="this.value=''">
-						<input type="text" name="Note" size="45"  value="Lipsum" onfocus="this.value=''">
+						<input type="text" name="orderID" size="45"  value="000000" onfocus="this.value=''">
+					</td>
+				</tr>
+				<tr>
+					<th>Status: </th>
+					<td>
+						<input type="text" name="quoteStatus" size="45"  value="'Sent','Recieved','Pending'" onfocus="this.value=''">
+					</td>
+				</tr>
+				<tr>
+					<th>InitialPrice: </th>
+					<td>
+						<input type="text" name="initialPrice" size="45"  value="$" onfocus="this.value=''">
+					</td>
+				</tr>
+				<tr>
+					<th>Note: </th>
+					<td>
+						<input type="text" name="note" size="45"  value="Lipsum" onfocus="this.value=''">
 					</td>
 				</tr>
 				<tr>
 					<td align="center" colspan="5">
-						<input type="submit" value="QuoteInsertFromDave"/>
+						<input type="submit" value="Send Quote"/>
 					</td>
 				</tr>
 			</table>
@@ -55,9 +70,6 @@
 	</div>
 
 	<br></br>
-	<form action = "deleteAllUsers">
-		<input type = "submit" value = "Delete users from the Database"/>
-	</form>
 	<a href="login.jsp"target ="_self" > logout</a><br><br> 
 	</div>
 

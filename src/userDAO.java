@@ -73,7 +73,7 @@ public class userDAO
                 throw new SQLException(e);
             }
             connect = (Connection) DriverManager
-  			      .getConnection("jdbc:mysql://127.0.0.1:3306/userdb?"
+  			      .getConnection("jdbc:mysql://127.0.0.1:3306/DavesTimber?"
   			          + "useSSL=false&user=" + username + "&password=" + password);
             System.out.println(connect);
         }

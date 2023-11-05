@@ -60,8 +60,13 @@ public class quoteDAO{
             } catch (ClassNotFoundException e) {
                 throw new SQLException(e);
             }
+            System.out.println("Connecting");
+            System.out.println(password);
+            System.out.println(username);
+            username = "john";
+            password = "pass1234";
             connect = (Connection) DriverManager
-  			      .getConnection("jdbc:mysql://127.0.0.1:3306/userdb?"
+  			      .getConnection("jdbc:mysql://127.0.0.1:3306/DavesTimber?allowPublicKeyRetrieval=true&"
   			          + "useSSL=false&user=" + username + "&password=" + password);
             System.out.println(connect);
         }
