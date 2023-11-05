@@ -31,8 +31,33 @@
 
             </c:forEach>
         </table>
+        <br></br>
+        <br></br>
+        
+        <caption><h2>Current Quotes</h2></caption>
+	    <div align="center">
+	        <table border="1" cellpadding="6" style="background-color:DarkGoldenRod">
+	            <caption><h2>List of Users</h2></caption>
+	            <tr>
+	                <th>Order ID</th>
+	                <th>Quote Status</th>
+	                <th>Amount</th>
+	                <th>Note</th>
+	            </tr>
+	            <c:forEach var="quotes" items="${listQuote}">
+	                <tr style="text-align:center">
+	                    <td><c:out value="${quote.orderID}" /></td>
+	                    <td><c:out value="${quote.quoteStatus}" /></td>
+	                    <td><c:out value="${quote.initialAmount}" /></td>
+	                    <td><c:out value="${quote.note}" /></td>
+	            </c:forEach>
+	        </table>
+
+		</div>
         
         
+        <br></br>
+        <br></br>
         <form action="quoteInsertFromDave">
 			<table border="1" cellpadding="5" style="background-color:DarkGoldenRod">
 				<tr>

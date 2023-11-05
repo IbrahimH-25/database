@@ -81,7 +81,8 @@ public class quoteDAO{
         disconnect();    
     }
     
-    public List<quote> listAllUsers() throws SQLException {
+    public List<quote> listAllQuotes() throws SQLException {
+    	System.out.println("Listing Quotes");
         List<quote> listQuote = new ArrayList<quote>();        
         String sql = "SELECT * FROM quotes";      
         connect_func();      
@@ -96,10 +97,13 @@ public class quoteDAO{
 
              
             quote quotes = new quote(orderID, quoteStatus, initialPrice, note);
+        	System.out.println(orderID);
             listQuote.add(quotes);
         }        
         resultSet.close();
-        disconnect();        
+        disconnect();    
+    	System.out.println("Done Listing Quotes");
+    	
         return listQuote;
     }
     

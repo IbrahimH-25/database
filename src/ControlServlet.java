@@ -113,7 +113,7 @@ public class ControlServlet extends HttpServlet {
 	    
 	    private void AdminPanel(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException{
 	    	System.out.println("Daves Admin Panel");
-			//request.setAttribute("listUser", userDAO.listAllUsers());
+			request.setAttribute("listQuote", quoteDAO.listAllQuotes());
 	    	request.getRequestDispatcher("DavesAdminPanel.jsp").forward(request, response);
 	    }
 	    
