@@ -96,9 +96,10 @@ public class quoteDAO{
             String note = resultSet.getString("note");
 
              
-            quote quotes = new quote(orderID, quoteStatus, initialPrice, note);
-        	System.out.println(orderID);
-            listQuote.add(quotes);
+            quote quote = new quote(orderID, quoteStatus, initialPrice, note);
+        	System.out.print(orderID);
+        	System.out.println(quoteStatus);
+            listQuote.add(quote);
         }        
         resultSet.close();
         disconnect();    

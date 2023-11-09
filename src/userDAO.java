@@ -90,6 +90,7 @@ public class userDAO
     
     public List<user> listAllUsers() throws SQLException {
         List<user> listUser = new ArrayList<user>();        
+        System.out.println("listing users");
         String sql = "SELECT * FROM User";      
         connect_func();      
         statement = (Statement) connect.createStatement();
@@ -205,10 +206,10 @@ public class userDAO
             String phoneNum = resultSet.getString("phoneNum");
             user = new user(email, firstName, lastName, password, clientID, adress_street_num,  adress_street,  adress_city,  adress_state,  adress_zip_code,creditCard,phoneNum);
         }
-         
+        System.out.println("getUser");
         resultSet.close();
         statement.close();
-         
+
         return user;
     }
     

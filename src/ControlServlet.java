@@ -69,6 +69,7 @@ public class ControlServlet extends HttpServlet {
         		rootPage(request,response, "");
         		break;
         	case "/DavesAdminPanel":
+        		System.out.println("Admin Panel Launch");
         		AdminPanel(request,response);
         		break;
         	case "/quoteInsertFromDave":
@@ -112,8 +113,10 @@ public class ControlServlet extends HttpServlet {
 	    }
 	    
 	    private void AdminPanel(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException{
-	    	System.out.println("Daves Admin Panel");
+	    	System.out.println("CSV-Daves Admin Panel");
 			request.setAttribute("listQuote", quoteDAO.listAllQuotes());
+		   	System.out.println(quoteDAO.listAllQuotes());
+	    	System.out.println("CSV-Listed Quotes");
 	    	request.getRequestDispatcher("DavesAdminPanel.jsp").forward(request, response);
 	    }
 	    

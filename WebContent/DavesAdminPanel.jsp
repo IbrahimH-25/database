@@ -44,7 +44,7 @@
 	                <th>Amount</th>
 	                <th>Note</th>
 	            </tr>
-	            <c:forEach var="quotes" items="${listQuote}">
+	            <c:forEach var="quote" items="${listQuote}">
 	                <tr style="text-align:center">
 	                    <td><c:out value="${quote.orderID}" /></td>
 	                    <td><c:out value="${quote.quoteStatus}" /></td>
