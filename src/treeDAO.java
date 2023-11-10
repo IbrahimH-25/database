@@ -23,16 +23,18 @@ import java.util.List;
 /**
  * Servlet implementation class Connect
  */
-@WebServlet("/userDAO")
-public class userDAO 
-{
+
+@WebServlet("/treeDAO")
+
+public class treeDAO{
+	
 	private static final long serialVersionUID = 1L;
 	private Connection connect = null;
 	private Statement statement = null;
 	private PreparedStatement preparedStatement = null;
 	private ResultSet resultSet = null;
 	
-	public userDAO(){}
+	public treeDAO(){}
 	
 	/** 
 	 * @see HttpServlet#HttpServlet()
@@ -50,20 +52,6 @@ public class userDAO
         }
     }
     
-    public boolean database_login(String email, String password) throws SQLException{
-    	try {
-    		connect_func("root","pass1234");
-    		String sql = "select * from user where email = ?";
-    		preparedStatement = connect.prepareStatement(sql);
-    		preparedStatement.setString(1, email);
-    		ResultSet rs = preparedStatement.executeQuery();
-    		return rs.next();
-    	}
-    	catch(SQLException e) {
-    		System.out.println("failed login");
-    		return false;
-    	}
-    }
 	//connect to the database 
     public void connect_func(String username, String password) throws SQLException {
         if (connect == null || connect.isClosed()) {
@@ -72,15 +60,20 @@ public class userDAO
             } catch (ClassNotFoundException e) {
                 throw new SQLException(e);
             }
+            System.out.println("Connecting");
+            System.out.println(password);
+            System.out.println(username);
+            username = "john";
+            password = "john1234";
             connect = (Connection) DriverManager
-  			      .getConnection("jdbc:mysql://127.0.0.1:3306/DavesTimber?"
+  			      .getConnection("jdbc:mysql://127.0.0.1:3306/DavesTimber?allowPublicKeyRetrieval=true&"
   			          + "useSSL=false&user=" + username + "&password=" + password);
             System.out.println(connect);
         }
     }
     
-    public void deleteAllUsers() throws SQLException {
-    	String sql = "DELETE FROM user WHERE email <> 'root'";
+    public void deleteAllTree() throws SQLException {
+    	String sql = "DELETE FROM tree";
         connect_func();      
         statement = (Statement) connect.createStatement();
         statement.execute(sql);
@@ -88,36 +81,32 @@ public class userDAO
         disconnect();    
     }
     
-    public List<user> listAllUsers() throws SQLException {
-        List<user> listUser = new ArrayList<user>();        
-        System.out.println("listing users");
-        String sql = "SELECT * FROM User";      
+    public List<tree> listAllTrees() throws SQLException {
+    	System.out.println("Listing Trees");
+        List<tree> listTree = new ArrayList<tree>();        
+        String sql = "SELECT * FROM tree";      
         connect_func();      
-        
         statement = (Statement) connect.createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
          
         while (resultSet.next()) {
-            String email = resultSet.getString("email");
-            String firstName = resultSet.getString("firstName");
-            String lastName = resultSet.getString("lastName");
-            String password = resultSet.getString("password");
-            String clientID = resultSet.getString("clientID");
-            String adress_street_num = resultSet.getString("adress_street_num"); 
-            String adress_street = resultSet.getString("adress_street"); 
-            String adress_city = resultSet.getString("adress_city"); 
-            String adress_state = resultSet.getString("adress_state"); 
-            String adress_zip_code = resultSet.getString("adress_zip_code"); 
-            String creditCard = resultSet.getString("creditCard");
-            String phoneNum = resultSet.getString("phoneNum");
+            String treeID = resultSet.getString("treeID");
+            String size = resultSet.getString("size");
+            String height = resultSet.getString("height");
+            String location = resultSet.getString("location");
+            
 
              
-            user users = new user(email,firstName, lastName, password, clientID, adress_street_num,  adress_street,  adress_city,  adress_state,  adress_zip_code, creditCard,phoneNum);
-            listUser.add(users);
+            tree tree = new tree(treeID, size, height, location);
+        	System.out.print(treeID);
+        	System.out.println(size);
+            listTree.add(tree);
         }        
         resultSet.close();
-        disconnect();        
-        return listUser;
+        disconnect();    
+    	System.out.println("Done Listing Trees");
+    	
+        return listTree;
     }
     
     protected void disconnect() throws SQLException {
@@ -126,29 +115,21 @@ public class userDAO
         }
     }
     
-    public void insert(user users) throws SQLException {
-    	connect_func("root","pass1234");         
-		String sql = "insert into User(email, firstName, lastName, password, clientID,adress_street_num, adress_street,adress_city,adress_state,adress_zip_code,creditCard,phoneNum) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,? ,?)";
+    public void insert(tree trees) throws SQLException {
+    	connect_func("john","john1234");         
+		String sql = "insert into Tree(treeID, size, height, location) values (?, ?, ?, ?)";
 		preparedStatement = (PreparedStatement) connect.prepareStatement(sql);
-			preparedStatement.setString(1, users.getEmail());
-			preparedStatement.setString(2, users.getFirstName());
-			preparedStatement.setString(3, users.getLastName());
-			preparedStatement.setString(4, users.getPassword());
-			preparedStatement.setString(5, users.getClientID());
-			preparedStatement.setString(6, users.getAdress_street_num());		
-			preparedStatement.setString(7, users.getAdress_street());		
-			preparedStatement.setString(8, users.getAdress_city());		
-			preparedStatement.setString(9, users.getAdress_state());		
-			preparedStatement.setString(10, users.getAdress_zip_code());		
-			preparedStatement.setString(11, users.getCreditCard());		
-			preparedStatement.setString(12, users.getPhoneNum());		
+			preparedStatement.setString(1, trees.getTreeID());
+			preparedStatement.setString(2, trees.getSize());
+			preparedStatement.setString(3, trees.getHeight());	
+			preparedStatement.setString(4, trees.getLocation());
 
 		preparedStatement.executeUpdate();
         preparedStatement.close();
     }
     
     public boolean delete(String email) throws SQLException {
-        String sql = "DELETE FROM User WHERE email = ?";        
+        String sql = "DELETE FROM tree WHERE email = ?";        
         connect_func();
          
         preparedStatement = (PreparedStatement) connect.prepareStatement(sql);
@@ -159,59 +140,44 @@ public class userDAO
         return rowDeleted;     
     }
      
-    public boolean update(user users) throws SQLException {
-        String sql = "update User set firstName=?, lastName =?,password = ?,clientID=?,adress_street_num =?, adress_street=?,adress_city=?,adress_state=?,adress_zip_code=?, creditCard=?, phoneNum =? where email = ?";
+    public boolean update(tree tree) throws SQLException {
+        String sql = "update tree set size =?,height = ? , location=?, where treeID = ?";
         connect_func();
         
         preparedStatement = (PreparedStatement) connect.prepareStatement(sql);
-        preparedStatement.setString(1, users.getEmail());
-        preparedStatement.setString(2, users.getFirstName());
-        preparedStatement.setString(3, users.getLastName());
-        preparedStatement.setString(4, users.getPassword());
-        preparedStatement.setString(5, users.getClientID());
-        preparedStatement.setString(6, users.getAdress_street_num());		
-        preparedStatement.setString(7, users.getAdress_street());		
-        preparedStatement.setString(8, users.getAdress_city());		
-        preparedStatement.setString(9, users.getAdress_state());		
-        preparedStatement.setString(10, users.getAdress_zip_code());		
-        preparedStatement.setString(11, users.getCreditCard());		
-        preparedStatement.setString(12, users.getPhoneNum());		
-         
+        preparedStatement.setString(1, tree.getTreeID());
+        preparedStatement.setString(2, tree.getSize());
+        preparedStatement.setString(3, tree.getHeight());
+        preparedStatement.setString(4, tree.getLocation());
+      
         boolean rowUpdated = preparedStatement.executeUpdate() > 0;
         preparedStatement.close();
         return rowUpdated;     
     }
     
-    public user getUser(String email) throws SQLException {
-    	user user = null;
-        String sql = "SELECT * FROM User WHERE email = ?";
+    public tree getTree(String treeID) throws SQLException {
+    	tree tree = null;
+        String sql = "SELECT * FROM tree WHERE treeID = ?";
          
         connect_func();
          
         preparedStatement = (PreparedStatement) connect.prepareStatement(sql);
-        preparedStatement.setString(1, email);
+        preparedStatement.setString(1, treeID);
          
         ResultSet resultSet = preparedStatement.executeQuery();
          
         if (resultSet.next()) {
-            String firstName = resultSet.getString("firstName");
-            String lastName = resultSet.getString("lastName");
-            String password = resultSet.getString("password");
-            String clientID = resultSet.getString("clientID");
-            String adress_street_num = resultSet.getString("adress_street_num"); 
-            String adress_street = resultSet.getString("adress_street"); 
-            String adress_city = resultSet.getString("adress_city"); 
-            String adress_state = resultSet.getString("adress_state"); 
-            String adress_zip_code = resultSet.getString("adress_zip_code"); 
-            String creditCard = resultSet.getString("creditCard");
-            String phoneNum = resultSet.getString("phoneNum");
-            user = new user(email, firstName, lastName, password, clientID, adress_street_num,  adress_street,  adress_city,  adress_state,  adress_zip_code,creditCard,phoneNum);
+            String size = resultSet.getString("size");
+            String height = resultSet.getString("height");
+            String location = resultSet.getString("location");
+
+            tree = new tree(treeID, size, height, location);
         }
-        System.out.println("getUser");
+         
         resultSet.close();
         statement.close();
-
-        return user;
+         
+        return tree;
     }
     
     public boolean checkEmail(String email) throws SQLException {
@@ -326,15 +292,6 @@ public class userDAO
         	statement.execute(TUPLES[i]);
         disconnect();
     }
-    
-    
-   
-    
-    
-    
-    
-    
-	
-	
 
+	
 }

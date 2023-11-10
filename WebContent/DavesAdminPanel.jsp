@@ -52,7 +52,9 @@
 	                    <td><c:out value="${quote.note}" /></td>
 	            </c:forEach>
 	        </table>
-			<a href="login.jsp" target="_self">Return to Login Page</a>
+				<form action = ${reloadQuoteTable} >
+					<input type = "submit" value = "reload"/>
+				</form>
 		</div>
         
         
