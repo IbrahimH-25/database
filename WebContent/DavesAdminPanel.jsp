@@ -52,7 +52,7 @@
 	                    <td><c:out value="${quote.note}" /></td>
 	            </c:forEach>
 	        </table>
-
+			<a href="login.jsp" target="_self">Return to Login Page</a>
 		</div>
         
         
