@@ -8,7 +8,7 @@
 	<h1>Welcome to DavesTimber</h1 style="background-color:DarkGoldenRod">
 		<p> ${errorOne } </p>
 		<p> ${errorTwo } </p>
-		<form action="register">
+		<form action="insertTree">
 			<table border="1" cellpadding="5" style="background-color:DarkGoldenRod">
 				<tr>
 					<th>Number of trees you wish to cut: </th>

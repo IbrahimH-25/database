@@ -83,7 +83,7 @@ public class ControlServlet extends HttpServlet {
         		AdminPanel(request,response);
         		System.out.println("Quote from dave sent!");
         		break; 
-        	case "/ClientsView":
+        	//case "/ClientsView":
         		
         	case  "/insertTree":
         		System.out.println("Tree Request from client being sent!");
@@ -137,26 +137,26 @@ public class ControlServlet extends HttpServlet {
 	    
 	    private void ClientsView(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException{
 	    	System.out.println("CSV-Daves Admin Panel");
-	    	request.setAttribute("insertTree", treeDAO.insert(null));
-	    	RequestDispatcher dispatcher = request.getRequestDispatcher("DavesAdminPanel.jsp");
+	    	//request.setAttribute("insertTree", treeDAO.insert(null));
+	    	RequestDispatcher dispatcher = request.getRequestDispatcher("ClientsView.jsp");
 	    	dispatcher.forward(request, response);
 	    }
 	    
-	    private void insertTree((HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException
+	    private void insertTree(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException
 	    {
-	    	System.out.println("Dave Sent Quote?");
-	    	String orderID = request.getParameter("orderID");
-	   	 	String quoteStatus = request.getParameter("quoteStatus");
-	   	 	String initialPrice = request.getParameter("initialPrice");
+	    	System.out.println("Client Sent Tree?");
+	    	String treeSize = request.getParameter("treeSize");
+	   	 	String treeHeight = request.getParameter("treeHeight");
+	   	 	String feetONI = request.getParameter("feetONI");
+	   	 	System.out.println(treeSize);
+	   	 	System.out.println(treeHeight);
+	   	 	System.out.println(feetONI);
+            tree trees = new tree("00000",treeSize,treeHeight, feetONI);
 
-	   	 	String note = request.getParameter("note");
-
-            quote quotes = new quote(orderID,quoteStatus, initialPrice, note);
-
-   	 		quoteDAO.insert(quotes);
+   	 		treeDAO.insert(trees);
 	    	System.out.println("Quote done");
    	 		//response.sendRedirect("login.jsp");
-   	 		response.sendRedirect("DavesAdminPanel.jsp");
+   	 		response.sendRedirect("ClientsView.jsp");
 	    }
 	    
 	    
