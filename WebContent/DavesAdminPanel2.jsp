@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
- <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>  
 <%@ page import="java.util.List" %>
+
 <!DOCTYPE html>
 <html>
 
@@ -10,43 +12,46 @@
 <title>Daves Root View</title>
 </head>
 <body style="background-color:lightgreen">
-
+	<sql:setDataSource
+    var="jspSQL"
+    driver="com.mysql.jdbc.Driver"
+    url="jdbc:mysql://127.0.0.1:3306/DavesTimber"
+    user="john" password="pass1234"
+/>
+<sql:query var="list_quotes" dataSource="${jspSQL}">
+    SELECT * FROM quotes;
+</sql:query>
 <div align = "center">
 	
 
 
 <h1>Portal View for DavesTimber</h1>
     <div align="center">
-        <table border="1" cellpadding="6" style="background-color:DarkGoldenRod">
-            <caption><h2>List of Users</h2></caption>
-            <tr>
-                <th>Client ID</th>
-                <th>Quote Status</th>
-                <th>Bill ID</th>
-            </tr>
-            <c:forEach var="users" items="${listUser}">
-                <tr style="text-align:center">
-                    <td><c:out value="${users.clientID}" /></td>
-                    <td><c:out value="${users.quoteStatus}" /></td>
-                    <td><c:out value="${users.billID}" /></td>
-
-            </c:forEach>
-        </table>
         <br></br>
         <br></br>
         
         <caption><h2>Current Quotes</h2></caption>
-	<%
-        quoteDAO QuoteDAO = new quoteDAO();
-        List<quote> quoteList = QuoteDAO.listAllQuotes();
-
-        for (quote cquote : quoteList) {
-    %>
-            <p>ID: <%= cquote.getQuoteID() %>, Name: <%= cquote.getQuoteStatus() %></p>
-            <!-- Display other properties as needed -->
-    <%
-        }
-    %>
+		<div align="center">
+	        <table border="1" cellpadding="6" style="background-color:DarkGoldenRod">
+	            <caption><h2>List of Quotes</h2></caption>
+	            <tr>
+	                <th>Order ID</th>
+	                <th>Quote Status</th>
+	                <th>Amount</th>
+	                <th>Note</th>
+	            </tr>
+	            <c:forEach var="quote" items="${list_quotes.rows}">
+	                <tr style="text-align:center">
+	                    <td><c:out value="${quote.orderID}" /></td>
+	                    <td><c:out value="${quote.quoteStatus}" /></td>
+	                    <td><c:out value="${quote.initialAmount}" /></td>
+	                    <td><c:out value="${quote.note}" /></td>
+	            </c:forEach>
+	        </table>
+				<form action = ${reloadQuoteTable} >
+					<input type = "submit" value = "reload"/>
+				</form>
+		</div>
         
         
         <br></br>
