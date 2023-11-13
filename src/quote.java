@@ -8,17 +8,21 @@ public class quote
 	 
 	    //constructors
 	    public quote() {
+	    	System.out.print("quote()");
 	    }
 	 
 	    public quote(String orderID) 
 	    {
+	    	System.out.print("quote(Str orderID)");
 	        this.orderID = orderID;
 	    }
 	    
 	    public quote(String orderID,String quoteStatus, String initialPrice, String note)
 	    {
+	    	
 	    	this(quoteStatus,initialPrice,note);
 	    	this.orderID = orderID;
+	    	System.out.print("quote (all)");
 	    }
 	 
 	
@@ -27,6 +31,7 @@ public class quote
 	    	this.quoteStatus = quoteStatus;
 	    	this.initialPrice = initialPrice;
 	        this.note = note;
+	    	System.out.print("quote(order ID)");
 	    }
 	    
 	   //getter and setter methods

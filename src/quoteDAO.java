@@ -84,7 +84,7 @@ public class quoteDAO{
     public List<quote> listAllQuotes() throws SQLException {
     	System.out.println("Listing Quotes");
         List<quote> listQuote = new ArrayList<quote>();        
-        String sql = "SELECT * FROM quotes";      
+        String sql = "SELECT * FROM Quotes";      
         connect_func();      
         statement = (Statement) connect.createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
@@ -96,15 +96,16 @@ public class quoteDAO{
             String note = resultSet.getString("note");
 
              
-            quote quote = new quote(orderID, quoteStatus, initialPrice, note);
+            quote quotes = new quote(orderID, quoteStatus, initialPrice, note);
         	System.out.print(orderID);
         	System.out.println(quoteStatus);
-            listQuote.add(quote);
+            listQuote.add(quotes);
         }        
         resultSet.close();
         disconnect();    
     	System.out.println("Done Listing Quotes");
     	
+    	System.out.println(listQuote);
         return listQuote;
     }
     

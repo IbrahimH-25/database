@@ -72,10 +72,15 @@ public class ControlServlet extends HttpServlet {
         		rootPage(request,response, "");
         		break;
 
-        	case "/DavesAdminPanel":
+        	case "/DavesAdminPanel2":
         		System.out.println("Admin Panel Launch");
         		AdminPanel(request,response);
         		break;
+        	case "/DavesAdminPanel":
+        		System.out.println("Admin Panel Launch");
+    	    	System.out.println("root view");
+    			request.setAttribute("listUser", userDAO.listAllUsers());
+    	    	request.getRequestDispatcher("DavesAdminPanel2.jsp").forward(request, response);
         	case "/quoteInsertFromDave":
         		System.out.println("Quote from dave being sent!");
         		quoteInsertFromDave(request,response);
@@ -129,9 +134,8 @@ public class ControlServlet extends HttpServlet {
 	    	System.out.println("CSV-Daves Admin Panel");
 			request.setAttribute("listQuote", quoteDAO.listAllQuotes());
 			request.setAttribute("reloadQuoteTable", quoteDAO.listAllQuotes());
-		   	System.out.println(quoteDAO.listAllQuotes());
 	    	System.out.println("CSV-Listed Quotes");
-	    	RequestDispatcher dispatcher = request.getRequestDispatcher("DavesAdminPanel.jsp");
+	    	RequestDispatcher dispatcher = request.getRequestDispatcher("DavesAdminPanel2.jsp");
 	    	dispatcher.forward(request, response);
 	    }
 	    
