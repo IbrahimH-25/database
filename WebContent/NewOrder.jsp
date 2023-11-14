@@ -1,7 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %> 
 <!DOCTYPE html>
 <html>
+<sql:setDataSource
+    var="jspSQL"
+    driver="com.mysql.cj.jdbc.Driver"
+    url="jdbc:mysql://127.0.0.1:3306/DavesTimber"
+    user="john" password="pass1234"
+/>
+
 <head><title>DavesTimber</title></head>
 <body style="background-color:LightGreen">
 	<div align="center">
@@ -129,6 +137,7 @@
 				imageInput3.name="images"+i;
 				imageInput3.required=true;
 				imageCell2.appendChild(imageInput3);
+				system.out.print(sizeInput);
 			}
 		}
 	</script>

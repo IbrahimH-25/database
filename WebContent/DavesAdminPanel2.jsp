@@ -21,6 +21,8 @@
 <sql:query var="list_quotes" dataSource="${jspSQL}">
     SELECT * FROM quotes;
 </sql:query>
+
+
 <div align = "center">
 	
 
@@ -56,6 +58,7 @@
         
         <br></br>
         <br></br>
+        <caption><h2>Submit Initial Quote</h2></caption>
         <form action="quoteInsertFromDave">
 			<table border="1" cellpadding="5" style="background-color:DarkGoldenRod">
 				<tr>

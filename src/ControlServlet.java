@@ -72,11 +72,11 @@ public class ControlServlet extends HttpServlet {
         		rootPage(request,response, "");
         		break;
 
-        	case "/DavesAdminPanel2":
+        	case "/DavesAdminPanel":
         		System.out.println("Admin Panel Launch");
         		AdminPanel(request,response);
         		break;
-        	case "/DavesAdminPanel":
+        	case "/DavesAdminPanel2":
         		System.out.println("Admin Panel Launch");
     	    	System.out.println("root view");
     			request.setAttribute("listUser", userDAO.listAllUsers());
@@ -87,6 +87,14 @@ public class ControlServlet extends HttpServlet {
         		System.out.println("Quote from dave sent - redirecting");
         		AdminPanel(request,response);
         		System.out.println("Quote from dave sent!");
+        		break; 
+        		
+        	case "/quoteUpdateFromDave":
+        		System.out.println("Quote updatefrom dave being sent!");
+        		quoteUpdateFromDave(request,response);
+        		System.out.println("Quote update from dave sent - redirecting");
+        		AdminPanel(request,response);
+        		System.out.println("Quote updatefrom dave sent!");
         		break; 
         	//case "/ClientsView":
         		
@@ -134,8 +142,9 @@ public class ControlServlet extends HttpServlet {
 	    	System.out.println("CSV-Daves Admin Panel");
 			request.setAttribute("listQuote", quoteDAO.listAllQuotes());
 			request.setAttribute("reloadQuoteTable", quoteDAO.listAllQuotes());
+			//request.setAttribute('insertInitialQuote', quoteDAO.insert(null));
 	    	System.out.println("CSV-Listed Quotes");
-	    	RequestDispatcher dispatcher = request.getRequestDispatcher("DavesAdminPanel2.jsp");
+	    	RequestDispatcher dispatcher = request.getRequestDispatcher("DavesAdminPanel.jsp");
 	    	dispatcher.forward(request, response);
 	    }
 	    
@@ -185,6 +194,29 @@ public class ControlServlet extends HttpServlet {
 
 
     	}
+	    
+	    private void quoteUpdateFromDave(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException
+    	{
+	    	System.out.println("Dave Update Sent Quote?");
+	    	String orderID = request.getParameter("orderID");
+	    	//System.out.println("1");
+	   	 	//String quoteStatus = request.getParameter("quoteStatus");
+	    	//System.out.println("2");
+	   	 	String initialPrice = request.getParameter("initialPrice");
+	    	//System.out.println("3");
+	   	 	String note = request.getParameter("note");
+	    	System.out.println("4");
+            quote quotes = new quote(orderID,"sent", initialPrice, note);
+	    	System.out.println("5");
+   	 		quoteDAO.update(quotes);
+	    	System.out.println("Quote done");
+   	 		//response.sendRedirect("login.jsp");
+   	 		//response.sendRedirect("DavesAdminPanel.jsp");
+	    	request.getRequestDispatcher("DavesAdminPanel.jsp").forward(request, response);
+
+
+    	}
+	    
 	    
 	    private void treeRequestInsert(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException
 	    {
