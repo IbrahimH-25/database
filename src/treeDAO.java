@@ -116,7 +116,7 @@ public class treeDAO{
     }
     
     public void insert(tree trees) throws SQLException {
-    	connect_func("john","john1234");         
+    	connect_func();         
 		String sql = "insert into Tree(treeID, size, height, location) values (?, ?, ?, ?)";
 		preparedStatement = (PreparedStatement) connect.prepareStatement(sql);
 			preparedStatement.setString(1, trees.getTreeID());

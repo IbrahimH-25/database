@@ -37,11 +37,10 @@
 					</td>
 				</tr>
 			</table>
-								<button type="submit">Request a Quote</button>
-				<form action = ${reloadQuoteTable} >
-					<input type = "submit" value = "reload"/>
-				</form>
+			<button type="submit">Request a Quote</button>
+			<button onclick="submitTrees()">Click Me</button>
 			<a href="login.jsp" target="_self">Return to Login Page</a>
+			
 
 		</form>
 	</div>

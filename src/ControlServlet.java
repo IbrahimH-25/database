@@ -96,13 +96,14 @@ public class ControlServlet extends HttpServlet {
         		AdminPanel(request,response);
         		System.out.println("Quote updatefrom dave sent!");
         		break; 
-        	//case "/ClientsView":
+        	case "/testSubmitQuote":
+        		
         		
         	case  "/insertTree":
         		System.out.println("Tree Request from client being sent!");
-        		quoteInsertFromDave(request,response);
+        		//quoteInsertFromDave(request,response);
         		System.out.println("Tree - redirecting");
-        		AdminPanel(request,response);
+        		insertTree(request,response);
         		System.out.println("Tree request from user sent!");
         		break;      
         	case "/logout":
@@ -158,11 +159,15 @@ public class ControlServlet extends HttpServlet {
 	    private void insertTree(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException
 	    {
 	    	System.out.println("Client Sent Tree?");
-	    	String treeSize = request.getParameter("treeSize");
-	   	 	String treeHeight = request.getParameter("treeHeight");
-	   	 	String feetONI = request.getParameter("feetONI");
+	    	//String treeNum = request.getParameter("size1");
+	    	String treeSize = request.getParameter("size1");
+	   	 	String treeHeight = request.getParameter("height1");
+	   	 	String feetONI = request.getParameter("feetOrNo1");
+	   	 	System.out.print("Tree Size");
 	   	 	System.out.println(treeSize);
+	   	 	System.out.print("Tree Height");
 	   	 	System.out.println(treeHeight);
+	   	 	System.out.print("Tree ONI");
 	   	 	System.out.println(feetONI);
             tree trees = new tree("00000",treeSize,treeHeight, feetONI);
 
@@ -177,7 +182,7 @@ public class ControlServlet extends HttpServlet {
     	{
 	    	System.out.println("Dave Sent Quote?");
 	    	String orderID = request.getParameter("orderID");
-	    	System.out.println("1");
+	    	System.out.println(orderID);
 	   	 	String quoteStatus = request.getParameter("quoteStatus");
 	    	System.out.println("2");
 	   	 	String initialPrice = request.getParameter("initialPrice");
