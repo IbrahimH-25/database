@@ -76,11 +76,11 @@ public class ControlServlet extends HttpServlet {
         		System.out.println("Admin Panel Launch");
         		AdminPanel(request,response);
         		break;
-        	case "/DavesAdminPanel2":
+        	/*case "/DavesAdminPanel2":
         		System.out.println("Admin Panel Launch");
     	    	System.out.println("root view");
     			request.setAttribute("listUser", userDAO.listAllUsers());
-    	    	request.getRequestDispatcher("DavesAdminPanel2.jsp").forward(request, response);
+    	    	request.getRequestDispatcher("DavesAdminPanel2.jsp").forward(request, response);*/
         	case "/quoteInsertFromDave":
         		System.out.println("Quote from dave being sent!");
         		quoteInsertFromDave(request,response);
@@ -96,7 +96,7 @@ public class ControlServlet extends HttpServlet {
         		AdminPanel(request,response);
         		System.out.println("Quote updatefrom dave sent!");
         		break; 
-        	case "/testSubmitQuote":
+        	//case "/testSubmitQuote":
         		
         		
         	case  "/insertTree":
@@ -104,6 +104,8 @@ public class ControlServlet extends HttpServlet {
         		//quoteInsertFromDave(request,response);
         		System.out.println("Tree - redirecting");
         		insertTree(request,response);
+        		//quote quoteInsert = new quote("000987","InitialOrder","0","Submit initial Quote please");
+        		//quoteDAO.insert(quoteInsert);      		
         		System.out.println("Tree request from user sent!");
         		break;      
         	case "/logout":
