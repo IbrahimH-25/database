@@ -96,6 +96,12 @@ public class ControlServlet extends HttpServlet {
         		AdminPanel(request,response);
         		System.out.println("Quote updatefrom dave sent!");
         		break; 
+        	case "/quoteUpdateFromClient":
+        		System.out.println("Quote updatefrom dave being sent!");
+        		quoteUpdateFromClient(request,response);
+        		System.out.println("Quote update from dave sent - redirecting");
+        		System.out.println("Quote updatefrom dave sent!");
+        		break; 
         	case "/ClientsView":
         		System.out.println("Clients View");
         		ClientsView(request,response);
@@ -203,6 +209,26 @@ public class ControlServlet extends HttpServlet {
 
     	}
 	    
+	    private void quoteUpdateFromClient(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException
+    	{
+	    	System.out.println("Dave Sent Quote?");
+	    	String orderID = request.getParameter("orderID");
+	    	System.out.println(orderID);
+	   	 	String initialPrice = request.getParameter("initialPrice");
+	    	System.out.println("3");
+	   	 	String note = request.getParameter("note");
+	    	System.out.println("4");
+            quote quotes = new quote(orderID,"quoteFromClient", initialPrice, note);
+	    	System.out.println("5");
+   	 		quoteDAO.update(quotes);
+	    	System.out.println("Quote done");
+   	 		//response.sendRedirect("login.jsp");
+   	 		response.sendRedirect("ClientsView.jsp");
+	    	//request.getRequestDispatcher("DavesAdminPanel.jsp").forward(request, response);
+
+
+    	}
+	    
 	    private void quoteUpdateFromDave(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException
     	{
 	    	System.out.println("Dave Update Sent Quote?");
@@ -214,7 +240,7 @@ public class ControlServlet extends HttpServlet {
 	    	//System.out.println("3");
 	   	 	String note = request.getParameter("note");
 	    	System.out.println("4");
-            quote quotes = new quote(orderID,"sent", initialPrice, note);
+            quote quotes = new quote(orderID,"quoteFromContractor", initialPrice, note);
 	    	System.out.println("5");
    	 		quoteDAO.update(quotes);
 	    	System.out.println("Quote done");
