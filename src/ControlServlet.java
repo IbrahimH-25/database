@@ -96,6 +96,13 @@ public class ControlServlet extends HttpServlet {
         		AdminPanel(request,response);
         		System.out.println("Quote updatefrom dave sent!");
         		break; 
+        	case "/quoteAcceptFromClient":
+        		System.out.println("Quote updatefrom dave being sent!");
+        		quoteAcceptFromClient(request,response);
+        		System.out.println("Quote update from dave sent - redirecting");
+        		AdminPanel(request,response);
+        		System.out.println("Quote updatefrom dave sent!");
+        		break; 
         	case "/quoteUpdateFromClient":
         		System.out.println("Quote updatefrom dave being sent!");
         		quoteUpdateFromClient(request,response);
@@ -221,6 +228,26 @@ public class ControlServlet extends HttpServlet {
             quote quotes = new quote(orderID,"quoteFromClient", initialPrice, note);
 	    	System.out.println("5");
    	 		quoteDAO.update(quotes);
+	    	System.out.println("Quote done");
+   	 		//response.sendRedirect("login.jsp");
+   	 		response.sendRedirect("ClientsView.jsp");
+	    	//request.getRequestDispatcher("DavesAdminPanel.jsp").forward(request, response);
+
+
+    	}
+	    
+	    private void quoteAcceptFromClient(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException
+    	{
+	    	System.out.println("Dave Sent Quote?");
+	    	String orderID = request.getParameter("orderID");
+	    	System.out.println(orderID);
+	   	 	String initialPrice = request.getParameter("initialPrice");
+	    	System.out.println("3");
+	   	 	String note = request.getParameter("note");
+	    	System.out.println("4");
+            quote quotes = new quote(orderID,"Accepted", "DUMMY", note);
+	    	System.out.println("5");
+   	 		quoteDAO.updateToAccept(quotes);
 	    	System.out.println("Quote done");
    	 		//response.sendRedirect("login.jsp");
    	 		response.sendRedirect("ClientsView.jsp");

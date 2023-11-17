@@ -55,7 +55,7 @@
 				<tr>
 					<th>InitialPrice: </th>
 					<td>
-						<input type="text" name="initialPrice" size="45"  value="$" onfocus="this.value=''">
+						<input type="text" name="Change Price" size="45"  value="$" onfocus="this.value=''">
 					</td>
 				</tr>
 				<tr>
@@ -70,7 +70,30 @@
 					</td>
 				</tr>
 			</table>
-		<a href="login.jsp" target="_self">Return to Login Page</a>
+	</form>
+	</div>
+ 
+  <caption><h2>Accept Quote</h2></caption>
+        <form action="quoteAcceptFromClient">
+			<table border="1" cellpadding="5" style="background-color:DarkGoldenRod">
+				<tr>
+					<th>Quote ID: </th>
+					<td align="center" colspan="3">
+						<input type="text" name="orderID" size="45"  value="000000" onfocus="this.value=''">
+					</td>
+				</tr>
+				<tr>
+					<th>Note: </th>
+					<td>
+						<input type="text" name="note" size="45"  value="Lipsum" onfocus="this.value=''">
+					</td>
+				</tr>
+				<tr>
+					<td align="center" colspan="5">
+						<input type="submit" value="Send Response"/>
+					</td>
+				</tr>
+			</table>
 	</form>
 	</div>
  

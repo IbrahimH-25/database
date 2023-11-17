@@ -157,6 +157,22 @@ public class quoteDAO{
         return rowUpdated;     
     }
     
+    public boolean updateToAccept(quote quotes) throws SQLException {
+        String sql = "update quotes set quoteStatus =?, note=? where orderID = ?";
+        System.out.print("SQL STATEMENT:");
+        System.out.println(sql);
+        connect_func();
+        System.out.println(quotes.getQuoteID());
+        preparedStatement = (PreparedStatement) connect.prepareStatement(sql);
+        preparedStatement.setString(3, quotes.getQuoteID());
+        preparedStatement.setString(1, quotes.getQuoteStatus());
+        preparedStatement.setString(2, quotes.getNote());
+      
+        boolean rowUpdated = preparedStatement.executeUpdate() > 0;
+        preparedStatement.close();
+        return rowUpdated;     
+    }
+    
     public quote getQuote(String orderID) throws SQLException {
     	quote quote = null;
         String sql = "SELECT * FROM quote WHERE orderID = ?";
