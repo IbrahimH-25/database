@@ -116,7 +116,7 @@ public class ControlServlet extends HttpServlet {
         		System.out.println("Tree Request from client being sent!");
         		//quoteInsertFromDave(request,response);
         		System.out.println("Tree - redirecting");
-        		quote quoteInsert = new quote("000987","InitialOrder","0","Submit initial Quote please");
+        		quote quoteInsert = new quote("000993","InitialOrder","0","Submit initial Quote please");
         		quoteDAO.insert(quoteInsert);  
         		insertTree(request,response);
     		
@@ -185,7 +185,7 @@ public class ControlServlet extends HttpServlet {
 	   	 	System.out.println(treeHeight);
 	   	 	System.out.print("Tree ONI");
 	   	 	System.out.println(feetONI);
-            tree trees = new tree("00000",treeSize,treeHeight, feetONI);
+            tree trees = new tree("00022",treeSize,treeHeight, feetONI);
 
    	 		treeDAO.insert(trees);
 	    	System.out.println("Quote done");

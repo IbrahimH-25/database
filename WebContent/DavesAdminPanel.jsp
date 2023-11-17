@@ -48,7 +48,7 @@
 	                <tr style="text-align:center">
 	                    <td><c:out value="${quote.orderID}" /></td>
 	                    <td><c:out value="${quote.quoteStatus}" /></td>
-	                    <td><c:out value="${quote.initialAmount}" /></td>
+	                    <td><c:out value="${quote.initialPrice}" /></td>
 	                    <td><c:out value="${quote.note}" /></td>
 	            </c:forEach>
 	        </table>
