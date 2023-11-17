@@ -96,16 +96,17 @@ public class ControlServlet extends HttpServlet {
         		AdminPanel(request,response);
         		System.out.println("Quote updatefrom dave sent!");
         		break; 
-        	//case "/testSubmitQuote":
-        		
-        		
+        	case "/ClientsView":
+        		System.out.println("Clients View");
+        		ClientsView(request,response);
         	case  "/insertTree":
         		System.out.println("Tree Request from client being sent!");
         		//quoteInsertFromDave(request,response);
         		System.out.println("Tree - redirecting");
+        		quote quoteInsert = new quote("000987","InitialOrder","0","Submit initial Quote please");
+        		quoteDAO.insert(quoteInsert);  
         		insertTree(request,response);
-        		//quote quoteInsert = new quote("000987","InitialOrder","0","Submit initial Quote please");
-        		//quoteDAO.insert(quoteInsert);      		
+    		
         		System.out.println("Tree request from user sent!");
         		break;      
         	case "/logout":
