@@ -7,7 +7,7 @@
     var="jspSQL"
     driver="com.mysql.cj.jdbc.Driver"
     url="jdbc:mysql://127.0.0.1:3306/DavesTimber"
-    user="john" password="pass1234"
+    user="john" password="john1234"
 />
 
 <head><title>DavesTimber</title></head>

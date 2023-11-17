@@ -299,7 +299,7 @@ public class ControlServlet extends HttpServlet {
 	    	 String email = request.getParameter("email");
 	    	 String password = request.getParameter("password");
 	    	 
-	    	 if (email.equals("root") && password.equals("pass1234")) {
+	    	 if (email.equals("root") && password.equals("john1234")) {
 				 System.out.println("Login Successful! Redirecting to root");
 				 session = request.getSession();
 				 session.setAttribute("username", email);
