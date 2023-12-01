@@ -11,48 +11,33 @@
 <meta charset="ISO-8859-1">
 <title>Daves Root View</title>
 </head>
-<body style="background-color:lightgreen">
-	<sql:setDataSource
-    var="jspSQL"
-    driver="com.mysql.cj.jdbc.Driver"
-    url="jdbc:mysql://127.0.0.1:3306/DavesTimber"
-    user="john" password="john1234"
-/>
-<sql:query var="list_quotes" dataSource="${jspSQL}">
-    SELECT * FROM quotes;
-</sql:query>
-<sql:query var="list_quotes_client_response" dataSource="${jspSQL}">
-    SELECT * FROM quotes where quoteStatus = "quoteFromClient";
-</sql:query>
 
 <div align = "center">
 	
 
 
-<h1>Portal View for DavesTimber</h1>
+<h1>Portal View for DavesTimber's Billing</h1>
     <div align="center">
         <br></br>
         <br></br>
         
-        <caption><h2>Current Quotes</h2></caption>
+        <caption><h2>Current Bills</h2></caption>
 		<div align="center">
 	        <table border="1" cellpadding="6" style="background-color:DarkGoldenRod">
 	            <caption><h2>List of Quotes</h2></caption>
 	            <tr>
-	                <th>Order ID</th>
-	                <th>Quote Status</th>
-	                <th>Amount</th>
-	                <th>Note</th>
+	                <th>Bill ID</th>
+	                <th>Bill Paid</th>
+	                <th>Bill Status</th>
 	            </tr>
-	            <c:forEach var="quote" items="${listQuote}">
+	            <c:forEach var="quote" items="${listBill}">
 	                <tr style="text-align:center">
-	                    <td><c:out value="${quote.orderID}" /></td>
-	                    <td><c:out value="${quote.quoteStatus}" /></td>
-	                    <td><c:out value="${quote.initialPrice}" /></td>
-	                    <td><c:out value="${quote.note}" /></td>
+	                    <td><c:out value="${quote.billId}" /></td>
+	                    <td><c:out value="${quote.billPaid}" /></td>
+	                    <td><c:out value="${quote.billStatus}" /></td>
 	            </c:forEach>
 	        </table>
-				<form action = "reloadQuoteTable" >
+				<form action = "reloadBillTable" >
 					<input type = "submit" value = "reload"/>
 				</form>
 		</div>

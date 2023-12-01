@@ -35,10 +35,10 @@ public class quote
 	    }
 	    
 	   //getter and setter methods
-	    public String getQuoteID() {
+	    public String getOrderID() {
 	        return orderID;
 	    }
-	    public void setQuoteOrderID(String orderID) {
+	    public void setOrderID(String orderID) {
 	        this.orderID = orderID;
 	    }
 	    

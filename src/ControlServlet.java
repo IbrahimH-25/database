@@ -69,6 +69,7 @@ public class ControlServlet extends HttpServlet {
         		rootPage(request,response,"");      
         		break;
         	case "/root":
+        		System.out.println("root page Launch");
         		rootPage(request,response, "");
         		break;
 
@@ -76,6 +77,9 @@ public class ControlServlet extends HttpServlet {
         		System.out.println("Admin Panel Launch");
         		AdminPanel(request,response);
         		break;
+        	case "/reloadQuoteTable":
+        		System.out.println("Admin Panel Reload");
+        		AdminPanel(request,response);
         	/*case "/DavesAdminPanel2":
         		System.out.println("Admin Panel Launch");
     	    	System.out.println("root view");
@@ -158,11 +162,10 @@ public class ControlServlet extends HttpServlet {
 	    private void AdminPanel(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException{
 	    	System.out.println("CSV-Daves Admin Panel");
 			request.setAttribute("listQuote", quoteDAO.listAllQuotes());
-			request.setAttribute("reloadQuoteTable", quoteDAO.listAllQuotes());
+			//request.setAttribute("reloadQuoteTable", quoteDAO.listAllQuotes());
 			//request.setAttribute('insertInitialQuote', quoteDAO.insert(null));
 	    	System.out.println("CSV-Listed Quotes");
-	    	RequestDispatcher dispatcher = request.getRequestDispatcher("DavesAdminPanel.jsp");
-	    	dispatcher.forward(request, response);
+	    	request.getRequestDispatcher("DavesAdminPanel.jsp").forward(request, response);
 	    }
 	    
 	    private void ClientsView(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException{
