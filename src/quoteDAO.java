@@ -110,6 +110,35 @@ public class quoteDAO{
         return listQuote;
     }
     
+    public List<quote> listQuery(String queryToUse) throws SQLException {
+    	System.out.println("Custom Quote Query");
+        List<quote> listQuote = new ArrayList<quote>();        
+        String sql = queryToUse;      
+        connect_func();      
+        statement = (Statement) connect.createStatement();
+        ResultSet resultSet = statement.executeQuery(sql);
+         
+        while (resultSet.next()) {
+            String orderID = resultSet.getString("orderID");
+            String quoteStatus = resultSet.getString("quoteStatus");
+            String initialPrice = resultSet.getString("initialPrice");
+            String note = resultSet.getString("note");
+
+             
+            quote quotes = new quote(orderID, quoteStatus, initialPrice, note);
+        	System.out.print(orderID);
+        	System.out.println(quoteStatus);
+            listQuote.add(quotes);
+        }        
+        resultSet.close();
+        disconnect();    
+    	System.out.println("Done Listing Quotes");
+    	
+    	System.out.println(listQuote);
+        return listQuote;
+    }
+    
+    
     protected void disconnect() throws SQLException {
         if (connect != null && !connect.isClosed()) {
         	connect.close();

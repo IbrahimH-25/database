@@ -51,25 +51,19 @@
 				<tr>
 					<th>Quote ID: </th>
 					<td align="center" colspan="3">
-						<input type="text" name="orderID" size="45"  value="000000" onfocus="this.value=''">
+						<input type="text" name="billId" size="45"  value="000000" onfocus="this.value=''">
 					</td>
 				</tr>
 				<tr>
 					<th>Status: </th>
 					<td>
-						<input type="text" name="quoteStatus" size="45"  value="'Sent','Recieved','Pending'" onfocus="this.value=''">
+						<input type="text" name="billPaid" size="45"  value="'Sent','Recieved','Pending'" onfocus="this.value=''">
 					</td>
 				</tr>
 				<tr>
 					<th>InitialPrice: </th>
 					<td>
-						<input type="text" name="initialPrice" size="45"  value="$" onfocus="this.value=''">
-					</td>
-				</tr>
-				<tr>
-					<th>Note: </th>
-					<td>
-						<input type="text" name="note" size="45"  value="Lipsum" onfocus="this.value=''">
+						<input type="text" name="billStatus" size="45"  value="$" onfocus="this.value=''">
 					</td>
 				</tr>
 				<tr>
@@ -84,7 +78,7 @@
 
 	<br></br>
 	
-	<h1>Portal View for Needed responses to clients</h1>
+	<h1>Portal View for Needed responses to clients bills</h1>
     <div align="center">
         <br></br>
         <br></br>
