@@ -25,6 +25,8 @@ public class ControlServlet extends HttpServlet {
 	    private userDAO userDAO = new userDAO();
 	    private quoteDAO quoteDAO = new quoteDAO();
 	    private treeDAO treeDAO = new treeDAO();
+	    private billDAO billDAO = new billDAO();
+	    private numGenerator numGen = new numGenerator();
 	    private String currentUser;
 	    private HttpSession session=null;
 	    
@@ -38,6 +40,8 @@ public class ControlServlet extends HttpServlet {
 	    	userDAO = new userDAO();
 	    	quoteDAO = new quoteDAO();
 	    	treeDAO = new treeDAO();
+	    	billDAO = new billDAO();
+	    	numGen = new numGenerator();
 	    	currentUser= "";
 	    }
 	    
@@ -113,6 +117,13 @@ public class ControlServlet extends HttpServlet {
         		System.out.println("Quote update from dave sent - redirecting");
         		System.out.println("Quote updatefrom dave sent!");
         		break; 
+        	case "/DavesBillingPage":
+    			request.setAttribute("listBills", billDAO.listAllBills());
+    	    	request.getRequestDispatcher("DavesBillingPage.jsp").forward(request, response);
+        	case "/billUpdateFromDave":
+        		//command here
+        		request.setAttribute("listBills", billDAO.listAllBills());
+    	    	request.getRequestDispatcher("DavesBillingPage.jsp").forward(request, response);
         	case "/ClientsView":
         		System.out.println("Clients View");
         		ClientsView(request,response);
@@ -162,6 +173,7 @@ public class ControlServlet extends HttpServlet {
 	    private void AdminPanel(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException{
 	    	System.out.println("CSV-Daves Admin Panel");
 			request.setAttribute("listQuote", quoteDAO.listAllQuotes());
+			request.setAttribute("listQuoteReplies", quoteDAO.listQuery("SELECT * FROM quotes where quoteStatus = 'quoteFromClient';"));
 			//request.setAttribute("reloadQuoteTable", quoteDAO.listAllQuotes());
 			//request.setAttribute('insertInitialQuote', quoteDAO.insert(null));
 	    	System.out.println("CSV-Listed Quotes");
@@ -200,9 +212,9 @@ public class ControlServlet extends HttpServlet {
 	    private void quoteInsertFromDave(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException
     	{
 	    	System.out.println("Dave Sent Quote?");
-	    	String orderID = request.getParameter("orderID");
+	    	String orderID = numGen.returnRandom6DigID();//request.getParameter("orderID");
 	    	System.out.println(orderID);
-	   	 	String quoteStatus = request.getParameter("quoteStatus");
+	   	 	String quoteStatus = "quoteFromContractor";//request.getParameter("quoteStatus");
 	    	System.out.println("2");
 	   	 	String initialPrice = request.getParameter("initialPrice");
 	    	System.out.println("3");

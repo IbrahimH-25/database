@@ -63,18 +63,7 @@
         <caption><h2>Submit Initial Quote</h2></caption>
         <form action="quoteInsertFromDave">
 			<table border="1" cellpadding="5" style="background-color:DarkGoldenRod">
-				<tr>
-					<th>Quote ID: </th>
-					<td align="center" colspan="3">
-						<input type="text" name="orderID" size="45"  value="000000" onfocus="this.value=''">
-					</td>
-				</tr>
-				<tr>
-					<th>Status: </th>
-					<td>
-						<input type="text" name="quoteStatus" size="45"  value="'Sent','Recieved','Pending'" onfocus="this.value=''">
-					</td>
-				</tr>
+				
 				<tr>
 					<th>InitialPrice: </th>
 					<td>
@@ -114,11 +103,11 @@
 	                <th>Amount</th>
 	                <th>Note</th>
 	            </tr>
-	            <c:forEach var="quote" items="${list_quotes_client_response.rows}">
+	            <c:forEach var="quote" items="${listQuoteReplies}">
 	                <tr style="text-align:center">
 	                    <td><c:out value="${quote.orderID}" /></td>
 	                    <td><c:out value="${quote.quoteStatus}" /></td>
-	                    <td><c:out value="${quote.initialAmount}" /></td>
+	                    <td><c:out value="${quote.initialPrice}" /></td>
 	                    <td><c:out value="${quote.note}" /></td>
 	            </c:forEach>
 	        </table>

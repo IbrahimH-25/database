@@ -82,32 +82,55 @@ public class billDAO
     
     public List<bill> listAllBills() throws SQLException {
     	System.out.println("Listing bills");
-        List<quote> listQuote = new ArrayList<quote>();        
+        List<bill> listBill = new ArrayList<bill>();        
         String sql = "SELECT * FROM bills";      
         connect_func();      
         statement = (Statement) connect.createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
          
         while (resultSet.next()) {
-            String orderID = resultSet.getString("orderID");
-            String quoteStatus = resultSet.getString("quoteStatus");
-            String initialPrice = resultSet.getString("initialPrice");
-            String note = resultSet.getString("note");
+            String billID = resultSet.getString("billID");
+            String billPaid = resultSet.getString("billPaid");
+            String billStatus = resultSet.getString("billStatus");
 
              
-            quote quotes = new quote(orderID, quoteStatus, initialPrice, note);
-        	System.out.print(orderID);
-        	System.out.println(quoteStatus);
-            listQuote.add(quotes);
+            bill bills = new bill(billID, billPaid, billStatus);
+            listBill.add(bills);
         }        
         resultSet.close();
         disconnect();    
     	System.out.println("Done Listing Quotes");
     	
-    	System.out.println(listQuote);
-        return listQuote;
+    	//System.out.println(listQuote);
+        return listBill;
     }
     
+    public List<bill> listFullQueryForBills(String query) throws SQLException {
+    	//List a full query for bill (meaning it will list the bill id, bill paid, and bill status
+    	
+    	System.out.println("Listing bills");
+        List<bill> listBill = new ArrayList<bill>();        
+        String sql = query;      
+        connect_func();      
+        statement = (Statement) connect.createStatement();
+        ResultSet resultSet = statement.executeQuery(sql);
+         
+        while (resultSet.next()) {
+            String billID = resultSet.getString("billID");
+            String billPaid = resultSet.getString("billPaid");
+            String billStatus = resultSet.getString("billStatus");
+
+             
+            bill bills = new bill(billID, billPaid, billStatus);
+            listBill.add(bills);
+        }        
+        resultSet.close();
+        disconnect();    
+    	System.out.println("Done Listing Quotes");
+    	
+    	//System.out.println(listQuote);
+        return listBill;
+    }
 
     protected void disconnect() throws SQLException {
         if (connect != null && !connect.isClosed()) {
@@ -116,7 +139,7 @@ public class billDAO
     }
     
     public void insert(bill bills) throws SQLException {
-    	connect_func("root","pass1234");         
+    	connect_func("root","pass1234");   
 		String sql = "insert into bill(id, paid, status) values( ? ,? ,?)";
 		preparedStatement = (PreparedStatement) connect.prepareStatement(sql);
 			preparedStatement.setString(1, bills.getBillId());
