@@ -11,19 +11,7 @@
 <meta charset="ISO-8859-1">
 <title>Daves Root View</title>
 </head>
-<body style="background-color:lightgreen">
-	<sql:setDataSource
-    var="jspSQL"
-    driver="com.mysql.cj.jdbc.Driver"
-    url="jdbc:mysql://127.0.0.1:3306/DavesTimber"
-    user="john" password="john1234"
-/>
-<sql:query var="list_quotes" dataSource="${jspSQL}">
-    SELECT * FROM quotes;
-</sql:query>
-<sql:query var="list_quotes_client_response" dataSource="${jspSQL}">
-    SELECT * FROM quotes where quoteStatus = "quoteFromClient";
-</sql:query>
+
 
 <div align = "center">
 	
@@ -103,12 +91,12 @@
 	                <th>Amount</th>
 	                <th>Note</th>
 	            </tr>
-	            <c:forEach var="quote" items="${listQuoteReplies}">
+	            <c:forEach var="quote2" items="${listQuoteReplies}">
 	                <tr style="text-align:center">
-	                    <td><c:out value="${quote.orderID}" /></td>
-	                    <td><c:out value="${quote.quoteStatus}" /></td>
-	                    <td><c:out value="${quote.initialPrice}" /></td>
-	                    <td><c:out value="${quote.note}" /></td>
+	                    <td><c:out value="${quote2.orderID}" /></td>
+	                    <td><c:out value="${quote2.quoteStatus}" /></td>
+	                    <td><c:out value="${quote2.initialPrice}" /></td>
+	                    <td><c:out value="${quote2.note}" /></td>
 	            </c:forEach>
 	        </table>
 				<form action = ${reloadQuoteTable} >
@@ -152,6 +140,71 @@
 	<br></br>
 	<a href="login.jsp"target ="_self" > logout</a><br><br> 
 	</div>
+	
+	
+	
+<h1>Portal View for DavesTimber's Billing</h1>
+    <div align="center">
+        <br></br>
+        <br></br>
+        
+        <caption><h2>Current Bills</h2></caption>
+		<div align="center">
+	        <table border="1" cellpadding="6" style="background-color:DarkGoldenRod">
+	            <caption><h2>List of Quotes</h2></caption>
+	            <tr>
+	                <th>Bill ID</th>
+	                <th>Bill Paid</th>
+	                <th>Bill Status</th>
+	            </tr>
+	            <c:forEach var="bills" items="${listBills}">
+	                <tr style="text-align:center">
+	                    <td><c:out value="${bills.billId}" /></td>
+	                    <td><c:out value="${bills.billPaid}" /></td>
+	                    <td><c:out value="${bills.billStatus}" /></td>
+	            </c:forEach>
+	        </table>
+				<form action = "reloadBillTable" >
+					<input type = "submit" value = "reload"/>
+				</form>
+		</div>
+        
+        
+        <br></br>
+        <br></br>
+        <caption><h2>Update Bill</h2></caption>
+        <form action="billUpdateFromDave">
+			<table border="1" cellpadding="5" style="background-color:DarkGoldenRod">
+				<tr>
+					<th>Quote ID: </th>
+					<td align="center" colspan="3">
+						<input type="text" name="billId" size="45"  value="000000" onfocus="this.value=''">
+					</td>
+				</tr>
+				<tr>
+					<th>Status: </th>
+					<td>
+						<input type="text" name="billPaid" size="45"  value="$" onfocus="this.value=''">
+					</td>
+				</tr>
+				<tr>
+					<th>InitialPrice: </th>
+					<td>
+						<input type="text" name="billStatus" size="45"  value="'billToCustomer','billFromCustomer'" onfocus="this.value=''">
+					</td>
+				</tr>
+				<tr>
+					<td align="center" colspan="5">
+						<input type="submit" value="Update Bill"/>
+					</td>
+				</tr>
+			</table>
+	</form>
+	</div>
+
+	<br></br>
+	
+	
 
 </body>
 </html>

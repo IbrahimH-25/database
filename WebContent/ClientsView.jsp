@@ -11,15 +11,6 @@
 <body style="background-color:lightgreen">
 
 <body style="background-color:lightgreen">
-	<sql:setDataSource
-    var="jspSQL"
-    driver="com.mysql.cj.jdbc.Driver"
-    url="jdbc:mysql://127.0.0.1:3306/DavesTimber"
-    user="john" password="john1234"
-/>
-<sql:query var="list_quotes_contractor_response" dataSource="${jspSQL}">
-    SELECT * FROM quotes where quoteStatus = "quoteFromContractor";
-</sql:query>
 
  <center>	<h1> Welcome to Daves Timber </h1> </center>
  
@@ -33,14 +24,17 @@
 	                <th>Amount</th>
 	                <th>Note</th>
 	            </tr>
-	            <c:forEach var="quote" items="${list_quotes_contractor_response.rows}">
+	            <c:forEach var="clientQuote" items="${listClientQuotes}">
 	                <tr style="text-align:center">
-	                    <td><c:out value="${quote.orderID}" /></td>
-	                    <td><c:out value="${quote.quoteStatus}" /></td>
-	                    <td><c:out value="${quote.initialPrice}" /></td>
-	                    <td><c:out value="${quote.note}" /></td>
+	                    <td><c:out value="${clientQuote.orderID}" /></td>
+	                    <td><c:out value="${clientQuote.quoteStatus}" /></td>
+	                    <td><c:out value="${clientQuote.initialPrice}" /></td>
+	                    <td><c:out value="${clientQuote.note}" /></td>
 	            </c:forEach>
 	        </table>
+	        <form action = "reloadClientQuoteTable" >
+					<input type = "submit" value = "reload"/>
+			</form>
 		</div>
  
  <caption><h2>Respond to Quote</h2></caption>

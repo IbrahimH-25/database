@@ -82,8 +82,10 @@ public class ControlServlet extends HttpServlet {
         		AdminPanel(request,response);
         		break;
         	case "/reloadQuoteTable":
+        		//quoteDAO.init();
         		System.out.println("Admin Panel Reload");
         		AdminPanel(request,response);
+        		break;
         	/*case "/DavesAdminPanel2":
         		System.out.println("Admin Panel Launch");
     	    	System.out.println("root view");
@@ -108,7 +110,8 @@ public class ControlServlet extends HttpServlet {
         		System.out.println("Quote updatefrom dave being sent!");
         		quoteAcceptFromClient(request,response);
         		System.out.println("Quote update from dave sent - redirecting");
-        		AdminPanel(request,response);
+        		
+    	    	request.getRequestDispatcher("ClientsView.jsp").forward(request, response);
         		System.out.println("Quote updatefrom dave sent!");
         		break; 
         	case "/quoteUpdateFromClient":
@@ -120,13 +123,20 @@ public class ControlServlet extends HttpServlet {
         	case "/DavesBillingPage":
     			request.setAttribute("listBills", billDAO.listAllBills());
     	    	request.getRequestDispatcher("DavesBillingPage.jsp").forward(request, response);
+        		break; 
         	case "/billUpdateFromDave":
         		//command here
         		request.setAttribute("listBills", billDAO.listAllBills());
-    	    	request.getRequestDispatcher("DavesBillingPage.jsp").forward(request, response);
+    	    	request.getRequestDispatcher("ClientsView.jsp").forward(request, response);
+        		break; 
         	case "/ClientsView":
         		System.out.println("Clients View");
         		ClientsView(request,response);
+        		break; 
+        	case "/reloadClientQuoteTable":
+        		System.out.println("Client Panel Reload");
+        		ClientsView(request,response);
+        		break; 
         	case  "/insertTree":
         		System.out.println("Tree Request from client being sent!");
         		//quoteInsertFromDave(request,response);
@@ -173,7 +183,7 @@ public class ControlServlet extends HttpServlet {
 	    private void AdminPanel(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException{
 	    	System.out.println("CSV-Daves Admin Panel");
 			request.setAttribute("listQuote", quoteDAO.listAllQuotes());
-			request.setAttribute("listQuoteReplies", quoteDAO.listQuery("SELECT * FROM quotes where quoteStatus = 'quoteFromClient';"));
+			request.setAttribute("listQuoteReplies", quoteDAO.listQuery("SELECT * FROM quotes where quoteStatus = 'quoteFromClient'"));
 			//request.setAttribute("reloadQuoteTable", quoteDAO.listAllQuotes());
 			//request.setAttribute('insertInitialQuote', quoteDAO.insert(null));
 	    	System.out.println("CSV-Listed Quotes");
@@ -181,10 +191,11 @@ public class ControlServlet extends HttpServlet {
 	    }
 	    
 	    private void ClientsView(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException{
-	    	System.out.println("CSV-Daves Admin Panel");
-	    	//request.setAttribute("insertTree", treeDAO.insert(null));
-	    	RequestDispatcher dispatcher = request.getRequestDispatcher("ClientsView.jsp");
-	    	dispatcher.forward(request, response);
+	    	System.out.println("CSV-Client Panel");
+	    	request.setAttribute("listClientQuotes", quoteDAO.listQuery("SELECT * FROM quotes where quoteStatus = 'quoteFromContractor';"));
+   	 		response.sendRedirect("ClientsView.jsp");
+	    	request.getRequestDispatcher("ClientsView.jsp").forward(request, response);
+
 	    }
 	    
 	    private void insertTree(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException
@@ -240,6 +251,7 @@ public class ControlServlet extends HttpServlet {
 	    	System.out.println("3");
 	   	 	String note = request.getParameter("note");
 	    	System.out.println("4");
+
             quote quotes = new quote(orderID,"quoteFromClient", initialPrice, note);
 	    	System.out.println("5");
    	 		quoteDAO.update(quotes);
@@ -256,13 +268,21 @@ public class ControlServlet extends HttpServlet {
 	    	System.out.println("Dave Sent Quote?");
 	    	String orderID = request.getParameter("orderID");
 	    	System.out.println(orderID);
-	   	 	String initialPrice = request.getParameter("initialPrice");
-	    	System.out.println("3");
 	   	 	String note = request.getParameter("note");
 	    	System.out.println("4");
-            quote quotes = new quote(orderID,"Accepted", "DUMMY", note);
+	    	quote selectedQuote = quoteDAO.getQuote(orderID);
+	    	System.out.println("4");
+            quote quotes = new quote(orderID,"Accepted", selectedQuote.getInitialPrice(), note);
 	    	System.out.println("5");
    	 		quoteDAO.updateToAccept(quotes);
+   	 		
+   	 		
+   	 		//make initial bill based on accepting
+   	 		String billId = numGen.returnRandom6DigID();
+   	 		String billPaid = selectedQuote.getInitialPrice();
+   	 		String billStatus = "billToCustomer";
+   	 		bill bills = new bill(billId,billPaid,billStatus);
+   	 		billDAO.insert(bills);
 	    	System.out.println("Quote done");
    	 		//response.sendRedirect("login.jsp");
    	 		response.sendRedirect("ClientsView.jsp");
@@ -293,6 +313,16 @@ public class ControlServlet extends HttpServlet {
 
     	}
 	    
+	    private void billSection(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException
+		{
+	    	request.setAttribute("listBills", billDAO.listAllBills());
+			//request.setAttribute("listQuoteReplies", quoteDAO.listQuery("SELECT * FROM quotes where quoteStatus = 'quoteFromClient';"));
+			//request.setAttribute("reloadQuoteTable", quoteDAO.listAllQuotes());
+			//request.setAttribute('insertInitialQuote', quoteDAO.insert(null));
+	    	//System.out.println("CSV-Listed Quotes");
+	    	//request.getRequestDispatcher("DavesAdminPanel.jsp").forward(request, response);
+
+		}
 	    
 	    private void treeRequestInsert(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException
 	    {

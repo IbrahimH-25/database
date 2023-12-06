@@ -25,7 +25,19 @@ import java.util.List;
  */
 
 @WebServlet("/quoteDAO")
-
+/*<body style="background-color:lightgreen">
+	<sql:setDataSource
+    var="jspSQL"
+    driver="com.mysql.cj.jdbc.Driver"
+    url="jdbc:mysql://127.0.0.1:3306/DavesTimber"
+    user="john" password="john1234"
+/>
+<sql:query var="list_quotes" dataSource="${jspSQL}">
+    SELECT * FROM quotes;
+</sql:query>
+<sql:query var="list_quotes_client_response" dataSource="${jspSQL}">
+    SELECT * FROM quotes where quoteStatus = "quoteFromClient";
+</sql:query>*/
 public class quoteDAO{
 	
 	private static final long serialVersionUID = 1L;
@@ -120,14 +132,17 @@ public class quoteDAO{
          
         while (resultSet.next()) {
             String orderID = resultSet.getString("orderID");
+            System.out.print(orderID);
             String quoteStatus = resultSet.getString("quoteStatus");
+            System.out.println(quoteStatus);
             String initialPrice = resultSet.getString("initialPrice");
+            System.out.println(initialPrice);
             String note = resultSet.getString("note");
 
              
             quote quotes = new quote(orderID, quoteStatus, initialPrice, note);
-        	System.out.print(orderID);
-        	System.out.println(quoteStatus);
+        	
+        	
             listQuote.add(quotes);
         }        
         resultSet.close();
@@ -182,7 +197,7 @@ public class quoteDAO{
         System.out.print("SQL STATEMENT:");
         System.out.println(sql);
         connect_func();
-        System.out.println(quotes.getOrderID());
+        System.out.println("update to accept pre statement");
         preparedStatement = (PreparedStatement) connect.prepareStatement(sql);
         preparedStatement.setString(3, quotes.getOrderID());
         preparedStatement.setString(1, quotes.getQuoteStatus());
@@ -194,9 +209,8 @@ public class quoteDAO{
     }
     
     public quote getQuote(String orderID) throws SQLException {
-    	quote quote = null;
-        String sql = "SELECT * FROM quote WHERE orderID = ?";
-         
+        String sql = "SELECT * FROM quotes WHERE orderID = ?";
+        quote chosenQuote = null;
         connect_func();
          
         preparedStatement = (PreparedStatement) connect.prepareStatement(sql);
@@ -205,18 +219,42 @@ public class quoteDAO{
         ResultSet resultSet = preparedStatement.executeQuery();
          
         if (resultSet.next()) {
+        	System.out.println("Next Result");
+        	//String orderId = resultSet.getString("quoteStatus");
             String quoteStatus = resultSet.getString("quoteStatus");
             String initialPrice = resultSet.getString("initialPrice");
             String note = resultSet.getString("note");
 
-            quote = new quote(orderID, quoteStatus, initialPrice, note);
+            chosenQuote = new quote(orderID, quoteStatus, initialPrice, note);
         }
-         
+        
         resultSet.close();
         statement.close();
          
-        return quote;
+        return chosenQuote;
     }
     
-  
+    public void init() throws SQLException, FileNotFoundException, IOException{
+    	connect_func();
+        statement =  (Statement) connect.createStatement();
+        
+        String[] INITIAL = {"drop database if exists DavesTimber; ",
+					        "create database DavesTimber; ",
+					        "use DavesTimber; ",
+					        "drop table if exists User; ",
+					        ("CREATE TABLE if not exists Quotes( " +
+					        	    "orderID VARCHAR(10) NOT NULL," +
+					        	    "quoteStatus VARCHAR(50) NOT NULL," + 
+					        	    "initialPrice VARCHAR(10) NOT NULL," +
+					        		"note VARCHAR(100) NOT NULL," +
+					        	    "PRIMARY KEY (orderID) ); " +
+					        	    "insert into Quotes(orderID, quoteStatus, initialPrice,note)"+
+					        	    "values ('000000', 'notsent', '1','lipsumOrum'),('000009','quoteFromClient','2000','5000 is too much for me'),('000006','quoteFromContractor','6000','Initial Response Fom Contractor for 6000'),('000007','quoteFromContractor','7000','Initial Response Fom Contractor for 7000');")
+        					};
+        for (int i = 0; i < INITIAL.length; i++) {
+        	System.out.println(INITIAL[i]);
+        	statement.execute(INITIAL[i]);}
+        disconnect();
+    }
+    
 }
