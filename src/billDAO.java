@@ -139,8 +139,8 @@ public class billDAO
     }
     
     public void insert(bill bills) throws SQLException {
-    	connect_func("root","pass1234");   
-		String sql = "insert into bill(id, paid, status) values( ? ,? ,?)";
+    	connect_func();   
+		String sql = "insert into bills(id, paid, status) values( ? ,? ,?)";
 		preparedStatement = (PreparedStatement) connect.prepareStatement(sql);
 			preparedStatement.setString(1, bills.getBillId());
 			preparedStatement.setString(2, bills.getBillPaid());
