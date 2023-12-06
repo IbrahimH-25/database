@@ -163,7 +163,7 @@ public class billDAO
     }
      
     public boolean update(bill bills) throws SQLException {
-        String sql = "update bill set paid=?,status=? where id=?";
+        String sql = "update bills set billPaid=?,billStatus=? where billId=?";
         connect_func();
         
         preparedStatement = (PreparedStatement) connect.prepareStatement(sql);
@@ -176,6 +176,33 @@ public class billDAO
         return rowUpdated;     
     }
 
+    public boolean updateFromClient(bill bills) throws SQLException {
+        String sql = "update bills set billPaid=?,billStatus=? where billId=?";
+        connect_func();
+        
+        preparedStatement = (PreparedStatement) connect.prepareStatement(sql);
+        preparedStatement.setString(1, bills.getBillPaid());
+        preparedStatement.setString(2, bills.getBillStatus());	
+        preparedStatement.setString(2, bills.getBillId());
+         
+        boolean rowUpdated = preparedStatement.executeUpdate() > 0;
+        preparedStatement.close();
+        return rowUpdated;     
+    }
+    
+    public boolean updateFromDave(bill bills) throws SQLException {
+        String sql = "update bills set billPaid=?,billStatus=? where billId=?";
+        connect_func();
+        
+        preparedStatement = (PreparedStatement) connect.prepareStatement(sql);
+        preparedStatement.setString(1, bills.getBillPaid());
+        preparedStatement.setString(2, bills.getBillStatus());	
+        preparedStatement.setString(2, bills.getBillId());
+         
+        boolean rowUpdated = preparedStatement.executeUpdate() > 0;
+        preparedStatement.close();
+        return rowUpdated;     
+    }
     
     
     
