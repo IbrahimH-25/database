@@ -205,6 +205,18 @@ public class billDAO
     }
     
     
+    public boolean payBillFromClient(bill bills,float payment) throws SQLException {
+        String sql = "update bills set billPaid=billPaid-?,billStatus='dispute' where billId=?";
+        connect_func();
+        
+        preparedStatement = (PreparedStatement) connect.prepareStatement(sql);
+        preparedStatement.setString(1, payment);
+        preparedStatement.setString(2, bills.getBillId());
+         
+        boolean rowUpdated = preparedStatement.executeUpdate() > 0;
+        preparedStatement.close();
+        return rowUpdated;     
+    }
     
     
     

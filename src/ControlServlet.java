@@ -129,6 +129,11 @@ public class ControlServlet extends HttpServlet {
         		request.setAttribute("listBills", billDAO.listAllBills());
     	    	request.getRequestDispatcher("ClientsView.jsp").forward(request, response);
         		break; 
+        	case "/billPayFromClient":
+        		//command here
+        		request.setAttribute("listBills", billDAO.listAllBills());
+    	    	request.getRequestDispatcher("ClientsView.jsp").forward(request, response);
+        		break; 
         	case "/ClientsView":
         		System.out.println("Clients View");
         		ClientsView(request,response);
