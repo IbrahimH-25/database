@@ -90,7 +90,7 @@ public class billDAO
          
         while (resultSet.next()) {
             String billID = resultSet.getString("billID");
-            String billPaid = resultSet.getString("billPaid");
+            int billPaid = resultSet.getInt("billPaid");
             String billStatus = resultSet.getString("billStatus");
 
              
@@ -117,7 +117,7 @@ public class billDAO
          
         while (resultSet.next()) {
             String billID = resultSet.getString("billID");
-            String billPaid = resultSet.getString("billPaid");
+            int billPaid = resultSet.getInt("billPaid");
             String billStatus = resultSet.getString("billStatus");
 
              
@@ -143,7 +143,7 @@ public class billDAO
 		String sql = "insert into bills(id, paid, status) values( ? ,? ,?)";
 		preparedStatement = (PreparedStatement) connect.prepareStatement(sql);
 			preparedStatement.setString(1, bills.getBillId());
-			preparedStatement.setString(2, bills.getBillPaid());
+			preparedStatement.setInt(2, bills.getBillPaid());
 			preparedStatement.setString(3, bills.getBillStatus());	
 
 		preparedStatement.executeUpdate();
@@ -167,7 +167,7 @@ public class billDAO
         connect_func();
         
         preparedStatement = (PreparedStatement) connect.prepareStatement(sql);
-        preparedStatement.setString(1, bills.getBillPaid());
+        preparedStatement.setInt(1, bills.getBillPaid());
         preparedStatement.setString(2, bills.getBillStatus());	
         preparedStatement.setString(2, bills.getBillId());
          
@@ -181,7 +181,7 @@ public class billDAO
         connect_func();
         
         preparedStatement = (PreparedStatement) connect.prepareStatement(sql);
-        preparedStatement.setString(1, bills.getBillPaid());
+        preparedStatement.setInt(1, bills.getBillPaid());
         preparedStatement.setString(2, bills.getBillStatus());	
         preparedStatement.setString(2, bills.getBillId());
          
@@ -195,7 +195,7 @@ public class billDAO
         connect_func();
         
         preparedStatement = (PreparedStatement) connect.prepareStatement(sql);
-        preparedStatement.setString(1, bills.getBillPaid());
+        preparedStatement.setInt(1, bills.getBillPaid());
         preparedStatement.setString(2, bills.getBillStatus());	
         preparedStatement.setString(2, bills.getBillId());
          
@@ -205,13 +205,17 @@ public class billDAO
     }
     
     
-    public boolean payBillFromClient(bill bills,float payment) throws SQLException {
+    public boolean payBillFromClient(String billId,int payment) throws SQLException {
         String sql = "update bills set billPaid=billPaid-?,billStatus='dispute' where billId=?";
         connect_func();
         
         preparedStatement = (PreparedStatement) connect.prepareStatement(sql);
-        preparedStatement.setString(1, payment);
-        preparedStatement.setString(2, bills.getBillId());
+        
+        
+        
+        preparedStatement.setInt(1, payment);
+        preparedStatement.setString(2, "dispute");//need to add a way to check if customer pays off bill
+        preparedStatement.setString(3, billId);
          
         boolean rowUpdated = preparedStatement.executeUpdate() > 0;
         preparedStatement.close();

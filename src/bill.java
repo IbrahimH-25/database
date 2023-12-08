@@ -1,7 +1,7 @@
 public class bill 
 {
 		protected String billId;
-	 	protected String billPaid;
+	 	protected int billPaid;
 	    protected String billStatus;
 	 
 	    //constructors
@@ -13,14 +13,14 @@ public class bill
 	        this.billId = billId;
 	    }
 	    
-	    public bill(String billId,String billPaid, String status) 
+	    public bill(String billId,int billPaid, String status) 
 	    {
 	    	this(billPaid,status);
 	    	this.billId = billId;
 	    }
 	 
 	
-	    public bill(String billPaid, String billStatus) 
+	    public bill(int billPaid, String billStatus) 
 	    {
 	    	this.billPaid = billPaid;
 	    	this.billStatus = billStatus;
@@ -35,10 +35,10 @@ public class bill
 	        this.billId = billId;
 	    }
 	    
-	    public String getBillPaid() {
+	    public int getBillPaid() {
 	        return billPaid;
 	    }
-	    public void setBillPaid(String billPaid) {
+	    public void setBillPaid(int billPaid) {
 	        this.billPaid = billPaid;
 	    }
 	    

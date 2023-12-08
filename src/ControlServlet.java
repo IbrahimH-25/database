@@ -131,6 +131,12 @@ public class ControlServlet extends HttpServlet {
         		break; 
         	case "/billPayFromClient":
         		//command here
+        		String billId = request.getParameter("billId");
+        		String billAmountToPayString = request.getParameter("billPaid");
+        		int billAmountToPay = Integer.parseInt(billAmountToPayString);
+        		//bill billClass = new bill(billId,billAmountToPay,"");
+        		billDAO.payBillFromClient(billId, billAmountToPay);
+        		
         		request.setAttribute("listBills", billDAO.listAllBills());
     	    	request.getRequestDispatcher("ClientsView.jsp").forward(request, response);
         		break; 
@@ -284,7 +290,7 @@ public class ControlServlet extends HttpServlet {
    	 		
    	 		//make initial bill based on accepting
    	 		String billId = numGen.returnRandom6DigID();
-   	 		String billPaid = selectedQuote.getInitialPrice();
+   	 		int billPaid =0;// selectedQuote.getInitialPrice();
    	 		String billStatus = "billToCustomer";
    	 		bill bills = new bill(billId,billPaid,billStatus);
    	 		billDAO.insert(bills);
