@@ -19,7 +19,8 @@
       <h1 style="background-color: DarkGoldenRod">Welcome to DavesTimber</h1>
       <!-- <p> ${errorOne } </p>
 		<p> ${errorTwo } </p> -->
-      <form action="insertTree">
+      <form action="insertTree" method = "POST" enctype='multipart/form-data'>
+      
         <table
           border="1"
           cellpadding="5"
@@ -120,7 +121,7 @@
           imageCell2.appendChild(imageLabel);
           const imageInput = document.createElement("input");
           imageInput.type = "file";
-          imageInput.name = "images" + i;
+          imageInput.name = "images" + i + "1";
           imageInput.required = true;
           imageCell2.appendChild(imageInput);
           const imageLabel2 = document.createElement("label");
@@ -130,7 +131,7 @@
           imageCell2.appendChild(imageLabel2);
           const imageInput2 = document.createElement("input");
           imageInput2.type = "file";
-          imageInput2.name = "images" + i;
+          imageInput2.name = "images" + i + "2";
           imageInput2.required = true;
           imageCell2.appendChild(imageInput2);
           const imageLabel3 = document.createElement("label");
@@ -140,7 +141,7 @@
           imageCell2.appendChild(imageLabel3);
           const imageInput3 = document.createElement("input");
           imageInput3.type = "file";
-          imageInput3.name = "images" + i;
+          imageInput3.name = "images" + i + "3";
           imageInput3.required = true;
           imageCell2.appendChild(imageInput3);
           // System.out.print(sizeInput);

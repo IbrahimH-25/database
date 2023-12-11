@@ -4,7 +4,7 @@ import java.io.PrintWriter;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import javax.servlet.ServletException;
+//import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -47,7 +47,7 @@ public class treeDAO{
             } catch (ClassNotFoundException e) {
                 throw new SQLException(e);
             }
-            connect = (Connection) DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/DavesTimber?allowPublicKeyRetrieval=true&useSSL=false&user=john&password=pass1234");
+            connect = (Connection) DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/DavesTimber?allowPublicKeyRetrieval=true&useSSL=false&user=john&password=john1234");
             System.out.println(connect);
         }
     }
@@ -94,10 +94,12 @@ public class treeDAO{
             String size = resultSet.getString("size");
             String height = resultSet.getString("height");
             String location = resultSet.getString("location");
-            
+            String photo1 = resultSet.getString("photo1");
+            String photo2 = resultSet.getString("photo2");
+            String photo3 = resultSet.getString("photo3");
 
              
-            tree tree = new tree(treeID, size, height, location);
+            tree tree = new tree(treeID, size, height, location, photo1, photo2, photo3);
         	System.out.print(treeID);
         	System.out.println(size);
             listTree.add(tree);
@@ -116,14 +118,17 @@ public class treeDAO{
     }
     
     public void insert(tree trees) throws SQLException {
-    	connect_func("john","john1234");         
-		String sql = "insert into Tree(treeID, size, height, location) values (?, ?, ?, ?)";
+    	connect_func();         
+		String sql = "insert into Tree(treeID, size, height, location, photo1, photo2, photo3) values (?, ?, ?, ?, ?, ?, ?)";
 		preparedStatement = (PreparedStatement) connect.prepareStatement(sql);
 			preparedStatement.setString(1, trees.getTreeID());
 			preparedStatement.setString(2, trees.getSize());
 			preparedStatement.setString(3, trees.getHeight());	
 			preparedStatement.setString(4, trees.getLocation());
-
+			preparedStatement.setString(5, trees.getPhoto1());
+			preparedStatement.setString(6, trees.getPhoto2());
+			preparedStatement.setString(7, trees.getPhoto3());
+			
 		preparedStatement.executeUpdate();
         preparedStatement.close();
     }
@@ -170,8 +175,12 @@ public class treeDAO{
             String size = resultSet.getString("size");
             String height = resultSet.getString("height");
             String location = resultSet.getString("location");
+            String photo1 = resultSet.getString("photo1");
+            String photo2 = resultSet.getString("photo2");
+            String photo3 = resultSet.getString("photo3");
+            
 
-            tree = new tree(treeID, size, height, location);
+            tree = new tree(treeID, size, height, location, photo1, photo2, photo3);
         }
          
         resultSet.close();
