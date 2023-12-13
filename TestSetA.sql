@@ -90,27 +90,27 @@ CREATE TABLE if not exists Tree2(
 	photo3 longblob NOT NULL,
     PRIMARY KEY (treeID) ); 
     insert into Tree2(treeID, clientID, size, height, location, treeStatus,photo1, photo2, photo3)
-    values ('000001','000013',8, 25,'yes','uncut','yes','yes','yes'),
+    values ('000001','000008',8, 25,'yes','uncut','yes','yes','yes'),
     ('000002','000003',14, 100,'yes','uncut','yes','yes','yes'),
-    ('000003','000012',9, 27,'yes','uncut','yes','yes','yes'),
+    ('000003','000005',9, 27,'yes','uncut','yes','yes','yes'),
     ('000004','000001',10, 30,'yes','uncut','yes','yes','yes'),
     ('000005','000001',12, 60,'yes','uncut','yes','yes','yes'),
-    ('000006',000001,13, 70,'yes','uncut','yes','yes','yes'),
-    ('000007','000014',4, 12,'yes','uncut','yes','yes','yes'),
-    ('000008','000014',5, 13,'yes','uncut','yes','yes','yes'),
-    ('000009','000014',8, 20,'yes','uncut','yes','yes','yes'),
-    ('000010','000014',6, 18,'yes','uncut','yes','yes','yes'),
+    ('000006','000001',13, 70,'yes','uncut','yes','yes','yes'),
+    ('000007','000007',4, 12,'yes','uncut','yes','yes','yes'),
+    ('000008','000007',5, 13,'yes','uncut','yes','yes','yes'),
+    ('000009','000007',8, 20,'yes','uncut','yes','yes','yes'),
+    ('000010','000005',6, 18,'yes','uncut','yes','yes','yes'),
     ('000011','000012',8, 22,'yes','uncut','yes','yes','yes'),
-    ('000012','000013',13, 67,'yes','uncut','yes','yes','yes')
+    ('000012','000008',13, 67,'yes','uncut','yes','yes','yes')
     ;
     
-drop table if exists Contractor; 
-CREATE TABLE if not exists Contractor( 
+drop table if exists Contractor2; 
+CREATE TABLE if not exists Contractor2( 
     clientID VARCHAR(10) NOT NULL, 
     billID VARCHAR(10), 
     orderID VARCHAR(10) NOT NULL, 
     PRIMARY KEY (clientID) ); 
-    insert into Contractor(clientID, billID, orderID)
+    insert into Contractor2(clientID, billID, orderID)
     values ('000003', '000003', '000010'),
     ('000001', '000005', '000011'),
     ('000005', '000001', '000012'),
