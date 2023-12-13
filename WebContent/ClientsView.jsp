@@ -107,7 +107,7 @@
 	                <th>Bill Paid</th>
 	                <th>Bill Status</th>
 	            </tr>
-	            <c:forEach var="bills" items="${listBills}">
+	            <c:forEach var="bills" items="${clientBillList}">
 	                <tr style="text-align:center">
 	                    <td><c:out value="${bills.billId}" /></td>
 	                    <td><c:out value="${bills.billPaid}" /></td>

@@ -126,8 +126,14 @@ public class ControlServlet extends HttpServlet {
         		break; 
         	case "/billUpdateFromDave":
         		//command here
+        		String billIdD = request.getParameter("billId");
+        		String billAmountToPayStringD = request.getParameter("billPaid");
+        		int billAmountToPayD = Integer.parseInt(billAmountToPayStringD);
+        		String billStatusD = request.getParameter("billStatus");
+        		bill billClassD = new bill(billIdD,billAmountToPayD,billStatusD);
+        		billDAO.updateFromDave(billClassD);
         		request.setAttribute("listBills", billDAO.listAllBills());
-    	    	request.getRequestDispatcher("ClientsView.jsp").forward(request, response);
+    	    	request.getRequestDispatcher("DavesAdminPanel.jsp").forward(request, response);
         		break; 
         	case "/billPayFromClient":
         		//command here
@@ -205,7 +211,8 @@ public class ControlServlet extends HttpServlet {
 	    private void ClientsView(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException{
 	    	System.out.println("CSV-Client Panel");
 	    	request.setAttribute("listClientQuotes", quoteDAO.listQuery("SELECT * FROM quotes where quoteStatus = 'quoteFromContractor';"));
-   	 		response.sendRedirect("ClientsView.jsp");
+	    	request.setAttribute("clientBillList", billDAO.listAllBills());
+	    	//response.sendRedirect("ClientsView.jsp");
 	    	request.getRequestDispatcher("ClientsView.jsp").forward(request, response);
 
 	    }
@@ -362,12 +369,17 @@ public class ControlServlet extends HttpServlet {
 				 session.setAttribute("username", email);
 				 rootPage(request, response, "");
 	    	 }
+	    	 else if(email.equals("David") && password.equals("david1234")) {
+	    		 System.out.println("Login Successful! Redirecting to adminpanel");
+	    		 AdminPanel(request, response);
+	    		 
+	    	 }
 	    	 else if(userDAO.isValid(email, password)) 
 	    	 {
 			 	 
 			 	 currentUser = email;
 				 System.out.println("Login Successful! Redirecting");
-				 request.getRequestDispatcher("activitypage.jsp").forward(request, response);
+				 ClientsView(request, response);
 			 			 			 			 
 	    	 }
 	    	 else {

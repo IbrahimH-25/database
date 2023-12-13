@@ -197,7 +197,7 @@ public class billDAO
         preparedStatement = (PreparedStatement) connect.prepareStatement(sql);
         preparedStatement.setInt(1, bills.getBillPaid());
         preparedStatement.setString(2, bills.getBillStatus());	
-        preparedStatement.setString(2, bills.getBillId());
+        preparedStatement.setString(3, bills.getBillId());
          
         boolean rowUpdated = preparedStatement.executeUpdate() > 0;
         preparedStatement.close();
@@ -206,17 +206,20 @@ public class billDAO
     
     
     public boolean payBillFromClient(String billId,int payment) throws SQLException {
-        String sql = "update bills set billPaid=billPaid-?,billStatus='dispute' where billId=?";
+        String sql = "update bills set billPaid=billPaid-?,billStatus=? where billId=?";
         connect_func();
         
         preparedStatement = (PreparedStatement) connect.prepareStatement(sql);
         
         
-        
+        System.out.println("Setting Values");
         preparedStatement.setInt(1, payment);
+        System.out.println(payment);
         preparedStatement.setString(2, "dispute");//need to add a way to check if customer pays off bill
+        System.out.println("Dispute");
         preparedStatement.setString(3, billId);
-         
+        System.out.println("ID");
+        //System.out.println(preparedStatement);
         boolean rowUpdated = preparedStatement.executeUpdate() > 0;
         preparedStatement.close();
         return rowUpdated;     

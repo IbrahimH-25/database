@@ -54,28 +54,29 @@ CREATE TABLE if not exists Quotes2(
     ('000012','Accepted',10000,1,'Thanks So Much'), 
     ('000013','Accepted',8000,5,'Finally happy to finish this'), 
     ('000014','Accepted',3000,2,'Thanks for cutting the small trees'), 
+	('000015','Accepted',1030,2,''), 
     ('000007','Ended',7000,10,'Wont work for me');
 
 
 drop table if exists Bills2; 
 CREATE TABLE if not exists Bills2( 
     billId VARCHAR(50) NOT NULL, 
-    billPaid VARCHAR(10) NOT NULL, 
+    billPaid int NOT NULL, 
 	billStatus VARCHAR(100) NOT NULL, 
     billDays int Not Null,
     billDaysToPay int Not NUll,
 	billDiscount VARCHAR(10) NOT NULL,
-    billTotal VARCHAR(100) NOT NULL,
+    billTotal int NOT NULL,
     PRIMARY KEY (billId) ); 
     insert into Bills2(billId, billPaid, billStatus,billDays,billDaysToPay,billDiscount,billTotal)
-    values ('000000', '10000', 'Paying', 3,30,"0%", 30000),
-    ('000009','0','Paid',0,30,"0%",1030),
-    ('000001','1300','Paying',4,30,"0%",10000),
-	('000002','1300','Paying',7,30,"0%",1999),
-	('000003','2330','Paying',18,30,"10%",8500),
-	('000004','1400','Paying',5,30,"0%",8000),
-    ('000005','3000','Overdue',8,7,"0%",6000),
-    ('000007','1039','Paying',4,30,"20%",3000);
+    values ('000000', 10000, 'Paying', 3,30,"0%", 30000),
+    ('000009',0,'Paid',0,30,"0%",1030),
+    ('000001',1300,'Paying',4,30,"0%",10000),
+	('000002',1999,'Paying',7,30,"0%",1999),
+	('000003',2330,'Paying',18,30,"10%",8500),
+	('000004',1400,'Paying',5,30,"0%",8000),
+    ('000005',3000,'Overdue',8,7,"0%",6000),
+    ('000007',1039,'Paying',4,30,"20%",3000);
 
 drop table if exists Tree2; 
 CREATE TABLE if not exists Tree2( 
@@ -90,18 +91,18 @@ CREATE TABLE if not exists Tree2(
 	photo3 longblob NOT NULL,
     PRIMARY KEY (treeID) ); 
     insert into Tree2(treeID, clientID, size, height, location, treeStatus,photo1, photo2, photo3)
-    values ('000001','000008',8, 25,'yes','uncut','yes','yes','yes'),
-    ('000002','000003',14, 100,'yes','uncut','yes','yes','yes'),
-    ('000003','000005',9, 27,'yes','uncut','yes','yes','yes'),
-    ('000004','000001',10, 30,'yes','uncut','yes','yes','yes'),
+    values ('000001','000008',8, 25,'yes','cut','yes','yes','yes'),
+    ('000002','000003',14, 100,'yes','cut','yes','yes','yes'),
+    ('000003','000005',9, 27,'yes','cut','yes','yes','yes'),
+    ('000004','000010',10, 30,'yes','cut','yes','yes','yes'),
     ('000005','000001',12, 60,'yes','uncut','yes','yes','yes'),
-    ('000006','000001',13, 70,'yes','uncut','yes','yes','yes'),
-    ('000007','000007',4, 12,'yes','uncut','yes','yes','yes'),
+    ('000006','000001',13, 70,'yes','cut','yes','yes','yes'),
+    ('000007','000007',4, 12,'yes','cut','yes','yes','yes'),
     ('000008','000007',5, 13,'yes','uncut','yes','yes','yes'),
-    ('000009','000007',8, 20,'yes','uncut','yes','yes','yes'),
-    ('000010','000005',6, 18,'yes','uncut','yes','yes','yes'),
-    ('000011','000012',8, 22,'yes','uncut','yes','yes','yes'),
-    ('000012','000008',13, 67,'yes','uncut','yes','yes','yes')
+    ('000009','000007',8, 20,'yes','cut','yes','yes','yes'),
+    ('000010','000005',6, 18,'yes','cut','yes','yes','yes'),
+    ('000011','000012',8, 22,'yes','cut','yes','yes','yes'),
+    ('000012','000008',13, 67,'yes','cut','yes','yes','yes')
     ;
     
 drop table if exists Contractor2; 
@@ -116,6 +117,7 @@ CREATE TABLE if not exists Contractor2(
     ('000005', '000001', '000012'),
     ('000008', '000004', '000013'),
     ('000007', '000007', '000014'),
+	('000010', '000009', '000015'),
     ('000002', '000000', '000002'),
     ('000004', '000000', '000004'),
     ('000006', '000000', '000006'),

@@ -154,7 +154,6 @@
 
 
 	<br></br>
-	<a href="login.jsp"target ="_self" > logout</a><br><br> 
 	</div>
 	
 	
@@ -180,7 +179,7 @@
 	                    <td><c:out value="${bills.billStatus}" /></td>
 	            </c:forEach>
 	        </table>
-				<form action = "reloadBillTable" >
+				<form action = "reloadQuoteTable" >
 					<input type = "submit" value = "reload"/>
 				</form>
 		</div>
@@ -200,7 +199,7 @@
 				<tr>
 					<th>Status: </th>
 					<td>
-						<input type="text" name="billPaid" size="45"  value="$" onfocus="this.value=''">
+						<input type="text" name="billPaid" size="45"  value="$" onfocus="this.value=0">
 					</td>
 				</tr>
 				<tr>
