@@ -195,6 +195,7 @@ public class ControlServlet extends HttpServlet {
 	    	System.out.println("CSV-Daves Admin Panel");
 			request.setAttribute("listQuote", quoteDAO.listAllQuotes());
 			request.setAttribute("listQuoteReplies", quoteDAO.listQuery("SELECT * FROM quotes where quoteStatus = 'quoteFromClient'"));
+			request.setAttribute("listBills", billDAO.listAllBills());
 			//request.setAttribute("reloadQuoteTable", quoteDAO.listAllQuotes());
 			//request.setAttribute('insertInitialQuote', quoteDAO.insert(null));
 	    	System.out.println("CSV-Listed Quotes");
@@ -222,7 +223,7 @@ public class ControlServlet extends HttpServlet {
 	   	 	System.out.println(treeHeight);
 	   	 	System.out.print("Tree ONI");
 	   	 	System.out.println(feetONI);
-            tree trees = new tree("00022",treeSize,treeHeight, feetONI);
+            tree trees = new tree("00022",treeSize,treeHeight, feetONI, feetONI, feetONI, feetONI);
 
    	 		treeDAO.insert(trees);
 	    	System.out.println("Quote done");
