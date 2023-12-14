@@ -9,23 +9,11 @@
 <!DOCTYPE html>
 <html>
 
-<body style="background-color:lightgreen">
-	<sql:setDataSource
-    var="jspSQL"
-    driver="com.mysql.cj.jdbc.Driver"
-    url="jdbc:mysql://127.0.0.1:3306/DavesTimber"
-    user="john" password="john1234"
-/>
-<sql:query var="list_quotes" dataSource="${jspSQL}">
-    SELECT * FROM quotes;
-</sql:query>
-<sql:query var="list_quotes_client_response" dataSource="${jspSQL}">
-    SELECT * FROM quotes where quoteStatus = "quoteFromClient";
-</sql:query>
+
 
 <head>
 <meta charset="ISO-8859-1">
-<title>Daves Root View</title>
+<title>Daves Admin View</title>
 </head>
 
 

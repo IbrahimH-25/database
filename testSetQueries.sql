@@ -18,3 +18,4 @@ SELECT billId from bills2 where billDays >=7;
 SELECT billId from bills2 where billPaid=billTotal;
 
 SELECT clientID from contractor2 join bills2 on bills2.billId=contractor2.billID where bills2.billDays=0 and bills2.billPaid=0;
+

@@ -3,7 +3,19 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>  
 <%@ page import="java.util.List" %>
-
+<body style="background-color:lightgreen">
+	<sql:setDataSource
+    var="jspSQL"
+    driver="com.mysql.cj.jdbc.Driver"
+    url="jdbc:mysql://127.0.0.1:3306/DavesTimber"
+    user="john" password="john1234"
+/>
+<sql:query var="list_quotes" dataSource="${jspSQL}">
+    SELECT * FROM quotes;
+</sql:query>
+<sql:query var="list_quotes_client_response" dataSource="${jspSQL}">
+    SELECT * FROM quotes where quoteStatus = "quoteFromClient";
+</sql:query>
 <!DOCTYPE html>
 <html>
 

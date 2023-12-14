@@ -158,7 +158,7 @@ public class ControlServlet extends HttpServlet {
         		System.out.println("Tree Request from client being sent!");
         		//quoteInsertFromDave(request,response);
         		System.out.println("Tree - redirecting");
-        		quote quoteInsert = new quote("000993","InitialOrder","0","Submit initial Quote please");
+        		quote quoteInsert = new quote("000996","InitialOrder","0","Submit initial Quote please");
         		quoteDAO.insert(quoteInsert);  
         		insertTree(request,response);
     		
