@@ -208,6 +208,7 @@ public class ControlServlet extends HttpServlet {
 			request.setAttribute("listQuote", quoteDAO.listAllQuotes());
 			request.setAttribute("listQuoteReplies", quoteDAO.listQuery("SELECT * FROM quotes where quoteStatus = 'quoteFromClient'"));
 			request.setAttribute("listBills", billDAO.listAllBills());
+			request.setAttribute("listTrees", treeDAO.listAllTrees());
 			//request.setAttribute("reloadQuoteTable", quoteDAO.listAllQuotes());
 			//request.setAttribute('insertInitialQuote', quoteDAO.insert(null));
 	    	System.out.println("CSV-Listed Quotes");

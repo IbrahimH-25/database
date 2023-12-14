@@ -13,5 +13,6 @@ CREATE TABLE if not exists Tree(
 	photo3 longblob NOT NULL,
     PRIMARY KEY (treeID) ); 
     insert into Tree(treeID, size, height, location, photo1, photo2, photo3)
-    values ('000001', '8 feet', '25 feet','yes');
+    values ('000001', '8 feet', '25 feet','far','yes','yes','yes'),
+    ('000002', '8 feet', '25 feet','far','random','blob','yes');
 select * from Tree;            

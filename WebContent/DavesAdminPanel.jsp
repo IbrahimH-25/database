@@ -206,8 +206,39 @@
 	</div>
 
 	<br></br>
-	
-	
+
+    <div align="center">
+        <br></br>
+        <br></br>
+        <caption><h2>Current Trees</h2></caption>
+		<div align="center">
+	        <table border="1" cellpadding="6" style="background-color:DarkGoldenRod">
+	            <caption><h2>List of Quotes</h2></caption>
+	            <tr>
+	                <th>tree ID</th>
+	                <th>tree size</th>
+	                <th>tree height</th>
+	                <th>tree location</th>
+	                <th>tree photo1</th>
+	                <th>tree photo2</th>
+	                <th>tree photo3</th>
+	            </tr>
+	            <c:forEach var="tree" items="${listTrees}">
+	                <tr style="text-align:center">
+	                    <td><c:out value="${tree.treeID}" /></td>
+	                    <td><c:out value="${tree.size}" /></td>
+	                    <td><c:out value="${tree.height}" /></td>
+	                    <td><c:out value="${tree.location}" /></td>
+	                    <td><c:out value="${tree.photo1}" /></td>
+	                    <td><c:out value="${tree.photo2}" /></td>
+	                    <td><c:out value="${tree.photo3}" /></td>
+	            </c:forEach>
+	        </table>
+				<form action = "reloadBillTable" >
+					<input type = "submit" value = "reload"/>
+				</form>
+		</div>
+        
 
 </body>
 </html>
