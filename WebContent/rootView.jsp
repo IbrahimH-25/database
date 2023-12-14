@@ -43,12 +43,14 @@
     SELECT billId from bills2 where billDays >=7;
 </sql:query>
 <sql:query var="bad_clients" dataSource="${jspSQL}">
-    SELECT billId from bills2 where billPaid=billTotal;
+    SELECT clientID from contractor2 join bills2 on bills2.billId=contractor2.billID where bills2.billPaid=bills2.billTotal;
 </sql:query>
 <sql:query var="good_clients" dataSource="${jspSQL}">
     SELECT clientID from contractor2 join bills2 on bills2.billId=contractor2.billID where bills2.billDays=0 and bills2.billPaid=0;
 </sql:query>
-
+<sql:query var="statistics" dataSource="${jspSQL}">
+    SELECT contractor2.clientID,count(tree2.treeId),bills2.billTotal,bills2.billPaid,bills2.billDaysToPay from contractor2 join tree2 on tree2.clientID=contractor2.clientID join bills2 on bills2.billId=contractor2.billID where tree2.treeStatus='cut' group by tree2.clientID;
+</sql:query>
 
 <div align = "center">
 
@@ -183,6 +185,56 @@
             <c:forEach var="query6" items="${bad_clients.rows}">
                 <tr style="text-align:center">
                     <td><c:out value="${query6.billId}" /></td>
+            </c:forEach>
+        </table>
+	</div>
+
+
+<h1>Good Clients</h1>
+    <div align="center">
+        <table border="1" cellpadding="6" style="background-color:DarkGoldenRod">
+            <caption><h2>List of Users</h2></caption>
+            <tr>
+                <th>ClientID</th>
+            </tr>
+            <c:forEach var="query7" items="${bad_clients.rows}">
+                <tr style="text-align:center">
+                    <td><c:out value="${query7.clientID}" /></td>
+            </c:forEach>
+        </table>
+	</div>
+
+<h1>Good Clients</h1>
+    <div align="center">
+        <table border="1" cellpadding="6" style="background-color:DarkGoldenRod">
+            <caption><h2>List of Users</h2></caption>
+            <tr>
+                <th>ClientID</th>
+            </tr>
+            <c:forEach var="query8" items="${bad_clients.rows}">
+                <tr style="text-align:center">
+                    <td><c:out value="${query8.clientID}" /></td>
+            </c:forEach>
+        </table>
+	</div>
+
+<h1>Good Clients</h1>
+    <div align="center">
+        <table border="1" cellpadding="6" style="background-color:DarkGoldenRod">
+            <caption><h2>List of Users</h2></caption>
+            <tr>
+                <th>ClientID</th>
+                <th>Total Bill</th>
+                <th>Total Remaining</th>
+                <th>Days for cut tree</th>
+            </tr>
+            <c:forEach var="query9" items="${statistics.rows}">
+                <tr style="text-align:center">
+                    <td><c:out value="${query9.clientID}" /></td>
+                    <td><c:out value="${query9.billTotal}" /></td>
+                    <td><c:out value="${query9.billPaid}" /></td>
+                    <td><c:out value="${query9.billDaysToPay}" /></td>
+
             </c:forEach>
         </table>
 	</div>

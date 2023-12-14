@@ -44,7 +44,7 @@ CREATE TABLE if not exists Quotes2(
     values ('000000', 'notsent', 1,0,'lipsumOrum'),
     ('000009','quoteFromClient',2000,0,'5000 is too much for me'),
     ('000001','quoteFromContractor',6000,0,'Initial Response Fom Contractor for 6000'),
-	('000002','quoteFromContractor',9000,2,'Response Fom Contractor for 9000'),
+	('000002','Accepted',9000,2,'Response Fom Contractor for 9000'),
 	('000003','quoteFromContractor',5000,0,'Initial Response Fom Contractor for 5000'),
 	('000004','quoteFromClient',1000,0,'this works for me'),
 	('000005','quoteFromClient',600,3,'highest i can spend right now'),
@@ -118,7 +118,7 @@ CREATE TABLE if not exists Contractor2(
     ('000008', '000004', '000013'),
     ('000007', '000007', '000014'),
 	('000010', '000009', '000015'),
-    ('000002', '000000', '000002'),
+    ('000002', '000002', '000002'),
     ('000004', '000000', '000004'),
     ('000006', '000000', '000006'),
     ('000009', '000000', '000009')
